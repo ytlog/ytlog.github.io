@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ytlog · 作品集</title>
+  <meta name="description" content="ytlog 的开源作品：ART DCEVM（Android 运行时类结构热重定义）与 mobby（在 Android 上运行 Code Agent）。">
+  <meta property="og:title" content="ytlog · Portfolio">
+  <meta property="og:description" content="ART DCEVM and mobby — Android runtime and on-device AI agent projects.">
+  <meta property="og:image" content="https://ytlog.github.io/assets/mobby-poster-en.jpg">
+  <link rel="icon" href="https://github.com/ytlog.png?size=64">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">ytlog</a>
+      <nav class="nav">
+        <a href="#projects" data-i18n="nav.projects">项目</a>
+        <a href="#focus" data-i18n="nav.focus">方向</a>
+        <a href="https://github.com/ytlog" target="_blank" rel="noopener">GitHub</a>
+        <button class="lang" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <img class="avatar" src="https://github.com/ytlog.png?size=192" alt="" width="96" height="96">
+      <div>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Android · 运行时 · 端侧 AI</p>
+        <h1 data-i18n="hero.title">做贴近系统底层的 Android 工具</h1>
+        <p class="lede" data-i18n="hero.lede">我是 ytlog，一名 Android 开发者。最近在做两件事：让 ART 支持运行中修改类结构，以及把 Code Agent 搬到手机上。</p>
+        <div class="hero-links">
+          <a class="btn primary" href="#projects" data-i18n="hero.cta">看项目</a>
+          <a class="btn" href="https://github.com/ytlog" target="_blank" rel="noopener">github.com/ytlog</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="wrap section">
+      <h2 class="section-title" data-i18n="projects.title">开源项目</h2>
+
+      <!-- ART DCEVM -->
+      <article class="project">
+        <div class="project-body">
+          <div class="project-head">
+            <h3>ART DCEVM</h3>
+            <span class="stars" data-repo="art-dcevm" title="GitHub stars">★ <b>6</b></span>
+          </div>
+          <p class="tagline" data-i18n="dcevm.tagline">Android 运行时类重定义增强库：应用运行中修改字段、方法、修饰符与继承关系，无需 root。</p>
+          <ul class="points">
+            <li data-i18n="dcevm.p1">字段、方法、构造器的新增、退役与恢复，字段类型与方法签名变化</li>
+            <li data-i18n="dcevm.p2">接口演进：新增 default/static 方法、父接口，与实现类同批原子提交</li>
+            <li data-i18n="dcevm.p3">保留已有对象的兼容字段值；不支持的变化整批拒绝，旧定义不受影响</li>
+            <li data-i18n="dcevm.p4">以 ART 自带的结构重定义事务为引擎，只接管校验、成员映射和类分配</li>
+          </ul>
+          <dl class="facts">
+            <div><dt data-i18n="facts.platform">平台</dt><dd>Android 11–17 · arm64</dd></div>
+            <div><dt data-i18n="facts.stack">技术</dt><dd>C++ · JVMTI · ART</dd></div>
+            <div><dt data-i18n="facts.use">用途</dt><dd data-i18n="dcevm.use">热重载 · 调试 · 类演进实验</dd></div>
+          </dl>
+          <div class="project-links">
+            <a class="btn primary" href="https://github.com/ytlog/art-dcevm" target="_blank" rel="noopener" data-i18n="links.repo">查看仓库</a>
+            <a class="btn" href="https://github.com/ytlog/art-dcevm/blob/main/docs/LIMITATIONS.md" target="_blank" rel="noopener" data-i18n-href="dcevm.docsHref" data-i18n="dcevm.docs">支持范围与限制</a>
+          </div>
+        </div>
+        <figure class="project-visual code-card" aria-label="Class change example">
+          <div class="code-bar"><span></span><span></span><span></span><em>User.java</em></div>
+<pre><code><span class="k">class</span> User {
+  String name;
+<span class="add">+ int age;</span>            <span class="c" data-i18n="code.c1">// 已有对象为 0</span>
+<span class="add">+ String greet() {</span>
+<span class="add">+   return "Hi, " + name;</span>
+<span class="add">+ }</span>
+<span class="del">- void legacy() { … }</span>  <span class="c" data-i18n="code.c2">// 旧调用按退役语义</span>
+}</code></pre>
+          <figcaption>
+            <ol class="flow">
+              <li data-i18n="flow.1">你的 JVMTI Agent</li>
+              <li>RedefineClasses</li>
+              <li data-i18n="flow.3">ART DCEVM 校验 · 映射</li>
+              <li data-i18n="flow.4">ART 结构事务</li>
+            </ol>
+          </figcaption>
+        </figure>
+      </article>
+
+      <!-- mobby -->
+      <article class="project">
+        <div class="project-body">
+          <div class="project-head">
+            <h3><img class="icon" src="assets/mobby-icon.svg" alt="" width="32" height="32">mobby</h3>
+            <span class="stars" data-repo="mobby" title="GitHub stars">★ <b>12</b></span>
+          </div>
+          <p class="tagline" data-i18n="mobby.tagline">让 Pi、Claude Code、Codex、OpenCode 直接在 Android 设备上运行，接入屏幕、相册和文件，成为你的个人 AI 助手。</p>
+          <ul class="points">
+            <li data-i18n="mobby.p1">页面问答：悬浮球识别屏幕，翻译、解释、继续追问</li>
+            <li data-i18n="mobby.p2">照片与文件：描述图片、复制整理文件，结果存回手机</li>
+            <li data-i18n="mobby.p3">操作 App：读屏、点按、输入，在页面间完成多步任务</li>
+            <li data-i18n="mobby.p4">设备上编程：在本机工作区写代码、起本地服务并在浏览器打开</li>
+          </ul>
+          <dl class="facts">
+            <div><dt data-i18n="facts.platform">平台</dt><dd>Android 8.0+ · arm64</dd></div>
+            <div><dt data-i18n="facts.stack">技术</dt><dd>Kotlin · Jetpack Compose</dd></div>
+            <div><dt data-i18n="facts.license">许可</dt><dd>MIT</dd></div>
+          </dl>
+          <div class="project-links">
+            <a class="btn primary" href="https://github.com/ytlog/mobby" target="_blank" rel="noopener" data-i18n="links.repo">查看仓库</a>
+            <a class="btn" href="https://github.com/ytlog/mobby/releases" target="_blank" rel="noopener" data-i18n="mobby.download">下载 APK</a>
+          </div>
+        </div>
+        <figure class="project-visual poster">
+          <img src="assets/mobby-poster-zh.jpg" data-src-zh="assets/mobby-poster-zh.jpg" data-src-en="assets/mobby-poster-en.jpg" alt="mobby 在 Android 平板与手机上" data-i18n-alt="mobby.alt" width="1400" height="788" loading="lazy">
+        </figure>
+      </article>
+    </section>
+
+    <section id="focus" class="wrap section">
+      <h2 class="section-title" data-i18n="focus.title">关注方向</h2>
+      <div class="focus-grid">
+        <div class="focus">
+          <h3 data-i18n="focus.a.t">Android 运行时</h3>
+          <p data-i18n="focus.a.d">ART 内部机制、JVMTI、类加载与重定义、Native Hook。</p>
+        </div>
+        <div class="focus">
+          <h3 data-i18n="focus.b.t">开发者工具</h3>
+          <p data-i18n="focus.b.d">热重载、调试辅助，以及在真机上可复核的验证流程。</p>
+        </div>
+        <div class="focus">
+          <h3 data-i18n="focus.c.t">端侧 AI Agent</h3>
+          <p data-i18n="focus.c.d">把 Code Agent 接入手机的屏幕、文件与应用能力。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <span>© 2026 ytlog</span>
+    <a href="https://github.com/ytlog" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
