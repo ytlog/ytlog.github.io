@@ -181,6 +181,7 @@ main, .topbar { position: relative; z-index: 1; }
 }
 .outro .quote { margin-bottom: 44px; }
 .footer { margin-top: 10vh; text-align: center; font: 12px var(--sans); letter-spacing: .3em; color: var(--dim); }
+.credit { display: block; margin-top: 10px; letter-spacing: .15em; opacity: .8; }
 
 /* reveal on scroll */
 .reveal { opacity: 0; transform: translateY(15px); transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.2, .8, .2, 1); }

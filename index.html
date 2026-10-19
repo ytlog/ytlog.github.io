@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ytlog · 运行时的形状</title>
-  <meta name="description" content="ytlog 的开源作品：ART DCEVM（Android 运行时类结构热重定义）与 mobby（在 Android 上运行 Code Agent）。">
+  <meta name="description" content="ytlog 的开源作品：ART DCEVM（Android 运行时类结构热重定义）、mobby（在 Android 上运行 Code Agent）与随心记 Flowa（打开即写的速记应用）。">
   <meta property="og:title" content="ytlog · The Shape of Runtime">
-  <meta property="og:description" content="ART DCEVM and mobby — Android runtime and on-device agent projects.">
+  <meta property="og:description" content="ART DCEVM, mobby and Flowa — Android runtime, on-device agent and note-taking projects.">
   <meta property="og:image" content="https://ytlog.github.io/assets/mobby-poster-en.jpg">
   <link rel="icon" href="https://github.com/ytlog.png?size=64">
   <script>
@@ -29,7 +29,8 @@
     <nav class="nav">
       <a class="chapter-link" href="#dcevm">I</a>
       <a class="chapter-link" href="#mobby">II</a>
-      <a class="chapter-link" href="#focus">III</a>
+      <a class="chapter-link" href="#flowa">III</a>
+      <a class="chapter-link" href="#focus">IV</a>
       <div class="theme-switch" role="group" aria-label="Theme">
         <button type="button" data-theme-btn="black" aria-label="Black"><i></i><span data-i18n="theme.black">黑</span></button>
         <button type="button" data-theme-btn="white" aria-label="White"><i></i><span data-i18n="theme.white">白</span></button>
@@ -144,9 +145,52 @@
     </section>
 
     <!-- Chapter III -->
-    <section class="scene" id="focus" data-scene="3">
+    <section class="scene" id="flowa" data-scene="3">
       <div class="scene-top">
         <span class="reveal">CHAPTER III</span>
+        <span class="reveal">Notes, Captured Instantly</span>
+      </div>
+      <div class="scene-main">
+        <h2 class="title reveal">Flowa</h2>
+        <p class="desc reveal" data-i18n="flowa.desc">打开即写的纯文本速记工具。接住一闪而过的想法，再用标签、搜索和工作流慢慢整理。</p>
+        <p class="quote reveal" data-i18n="flowa.quote">「打开，就开始记录」</p>
+      </div>
+    </section>
+    <section class="sheet" data-scene="3">
+      <div class="sheet-grid">
+        <div class="sheet-col reveal">
+          <h3><em>01</em><span data-i18n="sheet.capability">能力</span></h3>
+          <ul>
+            <li data-i18n="flowa.p1">打开即是空白页，草稿自动保存在本机</li>
+            <li data-i18n="flowa.p2">标签与关键词搜索，支持包含、排除标签筛选，随机回顾旧记录</li>
+            <li data-i18n="flowa.p3">内置保存、整理口述、润色文案等工作流，可自由组合 AI、复制与 HTTP 步骤</li>
+            <li data-i18n="flowa.p4">连接自己的 AI 服务；不配置也能完整使用记录功能</li>
+          </ul>
+        </div>
+        <div class="sheet-col reveal">
+          <h3><em>02</em><span data-i18n="sheet.spec">参数</span></h3>
+          <dl>
+            <div><dt data-i18n="facts.platform">平台</dt><dd>Android 8.0+ · iOS</dd></div>
+            <div><dt data-i18n="facts.stack">技术</dt><dd>Kotlin · Jetpack Compose</dd></div>
+            <div><dt data-i18n="facts.license">许可</dt><dd>GPL-3.0</dd></div>
+            <div><dt>Stars</dt><dd class="stars" data-repo="Flowa">1</dd></div>
+          </dl>
+        </div>
+        <div class="sheet-col reveal">
+          <h3><em>03</em><span data-i18n="sheet.links">链接</span></h3>
+          <div class="links">
+            <a class="pill" href="https://github.com/ytlog/Flowa" target="_blank" rel="noopener"><span data-i18n="links.repo">查看仓库</span></a>
+            <a class="pill ghost" href="https://github.com/ytlog/Flowa/releases/latest" target="_blank" rel="noopener"><span data-i18n="flowa.download">下载 APK</span></a>
+            <a class="pill ghost" href="https://apps.apple.com/cn/app/%E9%9A%8F%E5%BF%83%E8%AE%B0-%E6%89%93%E5%BC%80%E5%8D%B3%E5%86%99/id6778762693" target="_blank" rel="noopener">App Store</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter IV -->
+    <section class="scene" id="focus" data-scene="4">
+      <div class="scene-top">
+        <span class="reveal">CHAPTER IV</span>
         <span class="reveal">Focus</span>
       </div>
       <div class="scene-main">
@@ -154,7 +198,7 @@
         <p class="quote reveal" data-i18n="focus.quote">「三条轨道，围绕同一个内核」</p>
       </div>
     </section>
-    <section class="sheet" data-scene="3">
+    <section class="sheet" data-scene="4">
       <div class="orbits">
         <div class="orbit reveal">
           <h3 data-i18n="focus.a.t">Android 运行时</h3>
@@ -172,7 +216,7 @@
     </section>
 
     <!-- Outro -->
-    <section class="scene outro" id="outro" data-scene="4">
+    <section class="scene outro" id="outro" data-scene="5">
       <div class="scene-main">
         <h2 class="outro-title reveal">YTLOG</h2>
         <p class="quote reveal" data-i18n="outro.quote">「每一次热重载的表象之下，都是一次原子的结构事务」</p>
@@ -181,7 +225,7 @@
           <span>github.com/ytlog</span>
         </a>
       </div>
-      <footer class="footer">© 2026 ytlog</footer>
+      <footer class="footer">© 2026 ytlog<span class="credit"><span data-i18n="music.credit">音乐</span>：千年之后（氛围版）· 开智小曲</span></footer>
     </section>
   </main>
 

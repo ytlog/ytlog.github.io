@@ -3,6 +3,7 @@ const EN = {
   "theme.black": "Black",
   "theme.white": "White",
   "music.label": "Music",
+  "music.credit": "Music",
   "cover.title": "The Shape of Runtime",
   "cover.desc": "Android runtime · Developer tools · On-device agents",
   "cover.intro": "I'm ytlog, an Android developer. I make code change shape while it runs, and bring intelligence onto the phone.",
@@ -31,6 +32,13 @@ const EN = {
   "mobby.p4": "Coding on device: writes code locally, starts a server and opens it in the browser",
   "mobby.download": "Download APK",
   "mobby.alt": "mobby on an Android tablet and phone",
+  "flowa.desc": "A plain-text quick-capture notebook: open and write. Catch a fleeting thought, then sort it with tags, search and workflows.",
+  "flowa.quote": "“Open, and start capturing”",
+  "flowa.p1": "A blank page ready the moment you open the app; drafts autosave on your device",
+  "flowa.p2": "Tag and keyword search with include/exclude tag filters, plus random review of old notes",
+  "flowa.p3": "Built-in workflows for saving, cleaning up dictation and polishing text, freely combinable with AI, copy and HTTP steps",
+  "flowa.p4": "Connect your own AI service; notes work fully without one",
+  "flowa.download": "Download APK",
   "focus.title": "Focus",
   "focus.a.t": "Android runtime",
   "focus.a.d": "ART internals, JVMTI, class loading and redefinition, native hooks",
@@ -336,7 +344,40 @@ function drawAgentHub() {
   }
 }
 
-// Scene 3: three tilted orbits around a pulsing core, one per focus area.
+// Scene 3: a quick-capture page; a new line of text lands every beat, tagged
+// lines get a small chip, and the cursor waits on the next empty line.
+const notes = [];
+let lastNote = -1;
+
+function drawNotes() {
+  const fw = 360 * s;
+  const x0 = cx - fw / 2;
+  const top = cy - 130 * s;
+  const step = 28 * s;
+  const beat = Math.floor(time / 0.9);
+  if (beat !== lastNote) {
+    lastNote = beat;
+    notes.push({ len: 0.25 + Math.abs(Math.sin(beat * 1.7)) * 0.45, tag: beat % 3 === 0 });
+    if (notes.length > 8) notes.shift();
+  }
+  notes.forEach((n, i) => {
+    const y = top + i * step;
+    const age = notes.length - 1 - i;
+    const a = Math.max(0.25, 0.85 - age * 0.08);
+    line(x0, y, x0 + n.len * fw, y, a, 2);
+    if (n.tag) {
+      ctx.strokeStyle = fg(a);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x0 + fw - 36 * s, y - 6 * s, 36 * s, 12 * s);
+    }
+  });
+  if (Math.sin(time * 6) > 0) {
+    const y = top + notes.length * step;
+    line(x0, y - 8 * s, x0, y + 10 * s, 0.9, 2);
+  }
+}
+
+// Scene 4: three tilted orbits around a pulsing core, one per focus area.
 function drawOrbits() {
   dot(cx, cy, (26 + Math.sin(time * 4) * 6) * s, 0.9);
   const rings = [
@@ -361,7 +402,8 @@ function drawScene() {
   if (scene === 0) drawNetwork(34, 1, 1, -40, 140);
   else if (scene === 1) drawClassMorph();
   else if (scene === 2) drawAgentHub();
-  else if (scene === 3) drawOrbits();
+  else if (scene === 3) drawNotes();
+  else if (scene === 4) drawOrbits();
   else drawNetwork(46, 0.5, 1.5, -40, 150);
 }
 
