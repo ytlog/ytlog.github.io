@@ -1,54 +1,82 @@
 // ---------- i18n: Chinese lives in index.html, English here ----------
 const EN = {
-  "theme.black": "Black",
-  "theme.white": "White",
+  "theme.black": "Dark",
+  "theme.white": "Light",
   "view.simple": "Overview",
   "music.label": "Music",
   "music.credit": "Music",
-  "cover.title": "The Shape of Runtime",
-  "cover.desc": "Android runtime · Developer tools · On-device agents",
-  "cover.intro": "I'm ytlog, an Android developer. I make code change shape while it runs, and bring intelligence onto the phone.",
-  "dcevm.desc": "Enhanced class redefinition for the Android runtime. Change fields, methods, modifiers and inheritance while the app runs — no root, no system partition changes.",
-  "dcevm.quote": "“Rewriting a class's skeleton inside a process that never stops”",
+  "hero.eyebrow": "Android · Runtime · On-device AI",
+  "hero.title": "Android tools that work close to the system",
+  "hero.lede": "I'm ytlog, an Android developer working on a few things: letting ART change class structure in a running app, hot reload for Android Compose, bringing coding agents to the phone, and a notebook you can write in the moment it opens.",
+  "hero.cta": "See projects",
+  "kind.runtime": "Runtime",
+  "kind.agent": "On-device agent",
+  "kind.app": "App",
+  "kind.devtool": "Dev tool",
+  "sheet.features": "Features",
+  "sheet.details": "Details",
+  "sheet.links": "Links",
+  "facts.platform": "Platform",
+  "facts.stack": "Stack",
+  "facts.license": "License",
+  "links.repo": "Repository",
+  "links.apk": "Download APK",
+  "dcevm.short": "Change Android class structure at runtime",
+  "dcevm.tagline": "Enhanced class redefinition for the Android runtime: change fields, methods, modifiers and inheritance while the app runs — no root, no system partition changes.",
   "dcevm.p1": "Add, retire and restore fields, methods and constructors; change field types and method signatures",
   "dcevm.p2": "Interface evolution: new default/static methods and parent interfaces, batched atomically with implementations",
   "dcevm.p3": "Live objects keep compatible field values; unsupported changes reject the whole batch and keep old definitions",
   "dcevm.p4": "Built on ART's own structural redefinition transaction, taking over only verification, member mapping and class allocation",
-  "dcevm.use": "Hot reload · Debugging · Class evolution",
   "dcevm.docs": "Supported changes & limits",
   "dcevm.docsHref": "https://github.com/ytlog/art-dcevm/blob/main/docs/LIMITATIONS.en.md",
-  "sheet.capability": "Capabilities",
-  "sheet.spec": "Specs",
-  "sheet.links": "Links",
-  "facts.platform": "Platform",
-  "facts.stack": "Stack",
-  "facts.use": "Use",
-  "facts.license": "License",
-  "links.repo": "Repository",
-  "mobby.desc": "Runs Pi, Claude Code, Codex and OpenCode directly on Android, with access to your screen, photos and files — a personal AI assistant on your device.",
-  "mobby.quote": "“Coding agents, in your pocket”",
+  "code.c1": "// 0 in live objects",
+  "code.c2": "// old calls see it retired",
+  "flow.1": "Your JVMTI agent",
+  "flow.3": "ART DCEVM verify · map",
+  "flow.4": "ART structural transaction",
+  "mobby.short": "Coding agents running on Android",
+  "mobby.tagline": "Runs Pi, Claude Code, Codex and OpenCode directly on Android, with access to your screen, photos and files — a personal AI assistant on your device.",
   "mobby.p1": "Screen Q&A: tap the floating button to read the screen, then translate, explain or ask follow-ups",
   "mobby.p2": "Photos and files: describe images, organize files, save results back to the phone",
   "mobby.p3": "App control: reads the screen, taps and types across pages to finish multi-step tasks",
   "mobby.p4": "Coding on device: writes code locally, starts a server and opens it in the browser",
-  "mobby.download": "Download APK",
   "mobby.alt": "mobby on an Android tablet and phone",
-  "flowa.desc": "A plain-text quick-capture notebook: open and write. Catch a fleeting thought, then sort it with tags, search and workflows.",
-  "flowa.quote": "“Open, and start capturing”",
-  "flowa.p1": "A blank page ready the moment you open the app; drafts autosave on your device",
+  "flowa.cn": "",
+  "flowa.short": "A notebook that opens ready to write",
+  "flowa.tagline": "A plain-text quick-capture notebook: open and write. Catch a fleeting thought, then sort it with tags, search and workflows.",
+  "flowa.p1": "Opens on a blank page with the cursor ready; drafts autosave on your device",
   "flowa.p2": "Tag and keyword search with include/exclude tag filters, plus random review of old notes",
   "flowa.p3": "Built-in workflows for saving, cleaning up dictation and polishing text, freely combinable with AI, copy and HTTP steps",
   "flowa.p4": "Connect your own AI service; notes work fully without one",
-  "flowa.download": "Download APK",
+  "flowa.alt1": "Open and write, catching ideas anytime",
+  "flowa.alt2": "Search text and tags to find notes again",
+  "flowa.alt3": "Organize scattered ideas with tags",
+  "hotreload.short": "Hot reload for Android Compose",
+  "hotreload.tagline": "Hot reload for Jetpack Compose on Android: edit Kotlin / Java code, Compose UI and resources, then apply the changes to the running app — no APK reinstall, no process restart.",
+  "hotreload.p1": "Edit Compose UI and function bodies, and see the result in the running app after compiling",
+  "hotreload.p2": "Update existing Android resources such as strings, colors, drawables and assets",
+  "hotreload.p3": "Redefines classes on ART through art-dcevm, with add, change and remove for fields, methods and interfaces",
+  "hotreload.p4": "Gradle plugin setup; --auto reloads on save, and failure details appear in devtools",
+  "hotreload.guide": "Usage guide",
+  "hotreload.c1": "# run from your app project root",
+  "hotreload.c2": "# no reinstall; keeps remember state where possible",
+  "hotreload.c3": "+ save a Kotlin file → compile → hot reload",
+  "hotreload.f1": "Gradle plugin",
+  "hotreload.f2": "Convert to DEX",
+  "hotreload.f3": "Device runtime",
+  "hotreload.f4": "ART redefine · refresh UI",
   "focus.title": "Focus",
-  "focus.a.t": "Android runtime",
-  "focus.a.d": "ART internals, JVMTI, class loading and redefinition, native hooks",
-  "focus.b.t": "Developer tools",
-  "focus.b.d": "Hot reload, debugging aids, and verification reproducible on real devices",
-  "focus.c.t": "On-device agents",
-  "focus.c.d": "Connecting coding agents to the phone's screen, files and apps",
-  "focus.quote": "“Three orbits around one core”",
-  "outro.quote": "“Beneath every hot reload lies one atomic structural transaction”",
+  "focus.1": "Android performance",
+  "focus.2": "Android stability",
+  "focus.3": "Agent development",
+  "focus.4": "Full-stack development",
+  "focus.5": "On-device LLMs",
+  "focus.6": "APM monitoring",
+  "focus.7": "ART virtual machine",
+  "focus.8": "Engineering productivity · CI/CD",
+  "focus.9": "Android build systems",
+  "focus.10": "Cross-platform development",
+  "outro.note": "More projects and updates on GitHub",
 };
 
 const ZH = {};
@@ -72,7 +100,7 @@ function applyLang(next) {
     img.src = lang === "en" ? img.dataset.srcEn : img.dataset.srcZh;
   });
   document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
-  document.title = lang === "en" ? "ytlog · The Shape of Runtime" : "ytlog · 运行时的形状";
+  document.title = lang === "en" ? "ytlog · Portfolio Showcase" : "ytlog · 作品集（沉浸版）";
   langToggle.textContent = lang === "en" ? "中文" : "EN";
 }
 
@@ -193,7 +221,7 @@ function label(text, x, y, a, size = 11) {
   ctx.fillText(text, x, y);
 }
 
-// Scene 0 / 4: drifting nodes linked by proximity.
+// Scene 0 / 6: drifting nodes linked by proximity.
 function drawNetwork(n, speed, spread, oy, ry) {
   const pts = [];
   for (let i = 0; i < n; i++) {
@@ -378,7 +406,93 @@ function drawNotes() {
   }
 }
 
-// Scene 4: three tilted orbits around a pulsing core, one per focus area.
+// Scene 4: saving a file in the editor sends one change through the Gradle
+// plugin, DEX conversion and the device runtime; the running app's UI updates
+// in place while its remembered counter keeps counting.
+const editLines = [0.7, 0.45, 0.82, 0.38, 0.6, 0.74, 0.5, 0.66];
+const uiTarget = [0.8, 0.55, 0.7];
+const uiShown = [0.8, 0.55, 0.7];
+const stations = ["gradle", "dex", "runtime"];
+let lastSave = -1;
+let edited = 0;
+let packet = 1;
+let applied = 1;
+
+function drawHotReload() {
+  const ew = 220 * s, eh = 260 * s, ex = cx - 330 * s, ey = cy - eh / 2;
+  const pw = 140 * s, ph = 260 * s, px = cx + 330 * s - pw, py = cy - ph / 2;
+  const save = Math.floor(time / 2.4);
+  if (save !== lastSave) {
+    lastSave = save;
+    edited = (save * 5) % editLines.length;
+    editLines[edited] = 0.3 + Math.abs(Math.sin(save * 2.3)) * 0.6;
+    packet = 0;
+  }
+
+  // editor
+  ctx.strokeStyle = fg(0.55);
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(ex, ey, ew, eh);
+  line(ex, ey + 30 * s, ex + ew, ey + 30 * s, 0.3);
+  ctx.textAlign = "left";
+  ctx.font = `${Math.max(10, 14 * s)}px ui-monospace, Menlo, monospace`;
+  ctx.fillStyle = fg(0.8);
+  ctx.fillText("Screen.kt", ex + 14 * s, ey + 21 * s);
+  editLines.forEach((len, i) => {
+    const y = ey + 54 * s + i * 25 * s;
+    const hot = i === edited && packet < 1;
+    line(ex + 16 * s, y, ex + 16 * s + len * (ew - 32 * s), y, hot ? 1 : 0.45, hot ? 3 : 2);
+  });
+
+  // pipeline between the editor and the device
+  const x1 = ex + ew, x2 = px;
+  ctx.setLineDash([3, 6]);
+  line(x1, cy, x2, cy, 0.25);
+  ctx.setLineDash([]);
+  stations.forEach((name, i) => {
+    const t = (i + 1) / (stations.length + 1);
+    const x = x1 + (x2 - x1) * t;
+    const lit = packet < 1 && Math.abs(packet - t) < 0.08;
+    ctx.fillStyle = lit ? fg(0.95) : `rgb(${BG})`;
+    ctx.fillRect(x - 7 * s, cy - 7 * s, 14 * s, 14 * s);
+    ctx.strokeStyle = fg(lit ? 0.95 : 0.55);
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(x - 7 * s, cy - 7 * s, 14 * s, 14 * s);
+    label(name, x, i % 2 ? cy + 34 * s : cy - 22 * s, lit ? 0.9 : 0.5);
+  });
+  if (packet < 1) {
+    packet += 0.012;
+    dot(x1 + (x2 - x1) * packet, cy, 4.5, 1);
+    if (packet >= 1) {
+      const k = lastSave % uiTarget.length;
+      uiTarget[k] = 0.35 + Math.abs(Math.cos(lastSave * 1.9)) * 0.6;
+      applied = 0;
+    }
+  }
+
+  // the running app: UI blocks ease to their new size, state is untouched
+  ctx.strokeStyle = fg(0.6);
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(px, py, pw, ph);
+  line(px + pw / 2 - 14 * s, py + 12 * s, px + pw / 2 + 14 * s, py + 12 * s, 0.5, 2);
+  uiShown.forEach((v, i) => {
+    uiShown[i] += (uiTarget[i] - v) * 0.08;
+    const bx = px + 14 * s, by = py + 34 * s + i * 52 * s;
+    ctx.strokeStyle = fg(0.7);
+    ctx.lineWidth = 1;
+    ctx.strokeRect(bx, by, uiShown[i] * (pw - 28 * s), 38 * s);
+    line(bx + 8 * s, by + 14 * s, bx + 8 * s + uiShown[i] * (pw - 60 * s), by + 14 * s, 0.6, 2);
+  });
+  label(`count = ${Math.floor(time * 2)}`, px + pw / 2, py + ph - 22 * s, 0.8, 9);
+  if (applied < 1) {
+    applied += 0.025;
+    ctx.strokeStyle = fg(0.6 * (1 - applied));
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(px - applied * 24 * s, py - applied * 24 * s, pw + applied * 48 * s, ph + applied * 48 * s);
+  }
+}
+
+// Scene 5: three tilted orbits around a pulsing core.
 function drawOrbits() {
   dot(cx, cy, (26 + Math.sin(time * 4) * 6) * s, 0.9);
   const rings = [
@@ -404,7 +518,8 @@ function drawScene() {
   else if (scene === 1) drawClassMorph();
   else if (scene === 2) drawAgentHub();
   else if (scene === 3) drawNotes();
-  else if (scene === 4) drawOrbits();
+  else if (scene === 4) drawHotReload();
+  else if (scene === 5) drawOrbits();
   else drawNetwork(46, 0.5, 1.5, -40, 150);
 }
 

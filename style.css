@@ -159,10 +159,8 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.2; letter-spac
 .flow li:nth-child(3) { background: #2f6fe433; color: #b9cdff; }
 
 /* focus */
-.focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.focus { padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-.focus h3 { margin: 0 0 6px; font-size: 17px; }
-.focus p { margin: 0; color: var(--muted); font-size: 15px; }
+.focus-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.focus { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font-size: 15px; font-weight: 600; }
 
 .footer {
   display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
@@ -175,7 +173,8 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.2; letter-spac
 @media (max-width: 860px) {
   .project { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
   .project:nth-of-type(even) .project-visual { order: 0; }
-  .focus-grid, .glance { grid-template-columns: 1fr; }
+  .glance { grid-template-columns: 1fr; }
+  .focus-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px) {

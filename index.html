@@ -16,7 +16,7 @@
       if (t === "black" || t === "white") document.documentElement.dataset.theme = t;
     })();
   </script>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <header class="topbar">
@@ -228,20 +228,18 @@ $ ./gradlew :app:hotRunDebug --auto
 
     <section id="focus" class="wrap section">
       <h2 class="section-title" data-i18n="focus.title">关注方向</h2>
-      <div class="focus-grid">
-        <div class="focus">
-          <h3 data-i18n="focus.a.t">Android 运行时</h3>
-          <p data-i18n="focus.a.d">ART 内部机制、JVMTI、类加载与重定义、Native Hook</p>
-        </div>
-        <div class="focus">
-          <h3 data-i18n="focus.b.t">开发者工具</h3>
-          <p data-i18n="focus.b.d">热重载、调试辅助，以及在真机上可复核的验证流程</p>
-        </div>
-        <div class="focus">
-          <h3 data-i18n="focus.c.t">端侧智能体</h3>
-          <p data-i18n="focus.c.d">把 Code Agent 接入手机的屏幕、文件与应用能力</p>
-        </div>
-      </div>
+      <ul class="focus-grid">
+        <li class="focus" data-i18n="focus.1">Android 性能优化</li>
+        <li class="focus" data-i18n="focus.2">Android 稳定性优化</li>
+        <li class="focus" data-i18n="focus.3">智能体开发</li>
+        <li class="focus" data-i18n="focus.4">全栈开发</li>
+        <li class="focus" data-i18n="focus.5">端侧大模型</li>
+        <li class="focus" data-i18n="focus.6">APM 监控</li>
+        <li class="focus" data-i18n="focus.7">ART 虚拟机</li>
+        <li class="focus" data-i18n="focus.8">研发效能 · CI/CD</li>
+        <li class="focus" data-i18n="focus.9">Android 编译构建</li>
+        <li class="focus" data-i18n="focus.10">跨端开发</li>
+      </ul>
     </section>
   </main>
 
@@ -250,6 +248,6 @@ $ ./gradlew :app:hotRunDebug --auto
     <a href="showcase.html"><span aria-hidden="true">✦</span> <span data-i18n="footer.showcase">沉浸版作品集</span></a>
   </footer>
 
-  <script src="main.js?v=3"></script>
+  <script src="main.js?v=4"></script>
 </body>
 </html>
