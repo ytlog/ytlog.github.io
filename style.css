@@ -158,17 +158,16 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.2; letter-spac
 .flow li + li::before { content: "→"; margin-right: 8px; color: var(--code-muted); }
 .flow li:nth-child(3) { background: #2f6fe433; color: #b9cdff; }
 
-/* about and skills */
-.about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; padding: 32px 36px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-.about-body { margin: 0; font-size: 17px; }
-.about-sub { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
-.about .points { margin: 0; }
+/* skills */
 .skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .skill { padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
 .skill h3 { margin: 0 0 6px; font-size: 17px; }
 .skill p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .tags li { padding: 3px 10px; border-radius: 999px; font-size: 13px; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.practice { margin-top: 24px; padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.practice h3 { margin: 0 0 6px; font-size: 17px; }
+.practice .points { margin: 0; }
 .stack-line { margin: 18px 0 0; color: var(--muted); font: 13.5px/1.8 var(--mono); }
 .stack-line span { margin-right: 12px; font-family: inherit; color: var(--text); font-weight: 600; }
 
@@ -184,8 +183,7 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.2; letter-spac
   .project { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
   .project:nth-of-type(even) .project-visual { order: 0; }
   .glance { grid-template-columns: 1fr; }
-  .about, .skill-grid { grid-template-columns: 1fr; }
-  .about { gap: 20px; padding: 24px; }
+  .skill-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
