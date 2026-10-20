@@ -5,8 +5,8 @@ const EN = {
   "view.simple": "Overview",
   "music.label": "Music",
   "music.credit": "Music",
-  "hero.eyebrow": "Android · Infrastructure · AI engineering",
-  "hero.title": "Android tools that work close to the system",
+  "hero.eyebrow": "Android developer · Open-source portfolio",
+  "hero.title": "Android infrastructure and AI engineering",
   "hero.lede": "I'm ytlog, an Android developer with years of client-side work across product features, infrastructure, performance and stability. Lately I focus on AI-assisted development and cross-platform engineering, exploring the full loop from code generation and migration to on-device verification.",
   "hero.cta": "See projects",
   "kind.runtime": "Runtime",
@@ -87,7 +87,7 @@ const EN = {
   "focus.8": "Engineering productivity · CI/CD",
   "focus.9": "Android build systems",
   "focus.10": "Cross-platform development",
-  "outro.note": "More projects and updates on GitHub",
+  "outro.note": "Résumé available on request — reach me through GitHub",
 };
 
 const ZH = {};
@@ -600,11 +600,25 @@ applyTheme(root.dataset.theme);
 resize();
 if (!reduceMotion) render();
 
-// Refresh star counts; the numbers in the HTML stay if the API is unavailable.
+// Star counts: show the cached numbers at once and ask GitHub at most once an
+// hour, which keeps well inside its unauthenticated rate limit. Both pages share
+// the cache; the numbers in the HTML stay if the API is unavailable.
+const STAR_TTL = 60 * 60 * 1000;
+let starCache = {};
+try { starCache = JSON.parse(stored("stars")) || {}; } catch {}
+
 document.querySelectorAll(".stars[data-repo]").forEach(async (el) => {
+  const repo = el.dataset.repo;
+  const show = (n) => { el.textContent = n; };
+  const hit = starCache[repo];
+  if (hit) show(hit.n);
+  if (hit && Date.now() - hit.t < STAR_TTL) return;
   try {
-    const res = await fetch(`https://api.github.com/repos/ytlog/${el.dataset.repo}`);
+    const res = await fetch(`https://api.github.com/repos/ytlog/${repo}`);
     if (!res.ok) return;
-    el.textContent = (await res.json()).stargazers_count;
+    const n = (await res.json()).stargazers_count;
+    show(n);
+    starCache[repo] = { n, t: Date.now() };
+    store("stars", JSON.stringify(starCache));
   } catch {}
 });

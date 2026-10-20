@@ -3,8 +3,8 @@ const EN = {
   "nav.projects": "Projects",
   "nav.skills": "Skills",
   "nav.showcase": "Showcase",
-  "hero.eyebrow": "Android · Infrastructure · AI engineering",
-  "hero.title": "Android tools that work close to the system",
+  "hero.eyebrow": "Android developer · Open-source portfolio",
+  "hero.title": "Android infrastructure and AI engineering",
   "hero.lede": "I'm ytlog, an Android developer with years of client-side work across product features, infrastructure, performance and stability. Lately I focus on AI-assisted development and cross-platform engineering, exploring the full loop from code generation and migration to on-device verification.",
   "hero.cta": "See projects",
   "hero.showcase": "Showcase",
@@ -84,6 +84,7 @@ const EN = {
   "focus.8": "Engineering productivity · CI/CD",
   "focus.9": "Android build systems",
   "focus.10": "Cross-platform development",
+  "footer.contact": "Résumé available on request — reach me through GitHub",
   "footer.showcase": "Cinematic showcase",
 };
 
@@ -112,9 +113,6 @@ function applyLang(next) {
   textNodes.forEach((el) => { el.textContent = dict[el.dataset.i18n] ?? ZH[el.dataset.i18n]; });
   hrefNodes.forEach((el) => { el.setAttribute("href", dict[el.dataset.i18nHref]); });
   altNodes.forEach((el) => { el.setAttribute("alt", dict[el.dataset.i18nAlt]); });
-  document.querySelectorAll("img[data-src-en]").forEach((img) => {
-    img.src = lang === "en" ? img.dataset.srcEn : img.dataset.srcZh;
-  });
   document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
   document.title = lang === "en" ? "ytlog · Portfolio" : "ytlog · 作品集";
   langToggle.textContent = lang === "en" ? "中文" : "EN";
@@ -136,10 +134,20 @@ function isDark() {
   return root.dataset.theme ? root.dataset.theme === "black" : systemDark.matches;
 }
 
+// Pick each image for the current language, and its dark variant if it has one.
+function updateImages() {
+  const dark = isDark();
+  document.querySelectorAll("img[data-src-en]").forEach((img) => {
+    const key = (dark && img.dataset.srcDarkEn ? "srcDark" : "src") + (lang === "en" ? "En" : "Zh");
+    if (img.getAttribute("src") !== img.dataset[key]) img.src = img.dataset[key];
+  });
+}
+
 // The button names the mode it switches to.
 function updateThemeLabel() {
   const dark = isDark();
   root.classList.toggle("dark", dark);
+  updateImages();
   const target = dark ? (lang === "en" ? "Light" : "浅色") : (lang === "en" ? "Dark" : "深色");
   themeLabel.textContent = target;
   themeToggle.setAttribute("aria-label", target);
@@ -158,11 +166,25 @@ systemDark.addEventListener("change", updateThemeLabel);
 
 applyLang(stored("lang") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en"));
 
-// Refresh star counts; the numbers in the HTML stay if the API is unavailable.
+// Star counts: show the cached numbers at once and ask GitHub at most once an
+// hour, which keeps well inside its unauthenticated rate limit. Both pages share
+// the cache; the numbers in the HTML stay if the API is unavailable.
+const STAR_TTL = 60 * 60 * 1000;
+let starCache = {};
+try { starCache = JSON.parse(stored("stars")) || {}; } catch {}
+
 document.querySelectorAll(".stars[data-repo]").forEach(async (el) => {
+  const repo = el.dataset.repo;
+  const show = (n) => { el.querySelector("b").textContent = n; };
+  const hit = starCache[repo];
+  if (hit) show(hit.n);
+  if (hit && Date.now() - hit.t < STAR_TTL) return;
   try {
-    const res = await fetch(`https://api.github.com/repos/ytlog/${el.dataset.repo}`);
+    const res = await fetch(`https://api.github.com/repos/ytlog/${repo}`);
     if (!res.ok) return;
-    el.querySelector("b").textContent = (await res.json()).stargazers_count;
+    const n = (await res.json()).stargazers_count;
+    show(n);
+    starCache[repo] = { n, t: Date.now() };
+    store("stars", JSON.stringify(starCache));
   } catch {}
 });
