@@ -3,7 +3,6 @@ const EN = {
   "theme.black": "Dark",
   "theme.white": "Light",
   "view.simple": "Overview",
-  "music.label": "Music",
   "hero.eyebrow": "Android developer · Open-source portfolio",
   "hero.title": "Android infrastructure and AI engineering",
   "hero.lede": "I'm ytlog, an Android developer with years of client-side work across product features, infrastructure, performance and stability. Lately I focus on AI-assisted development and cross-platform engineering, exploring the full loop from code generation and migration to on-device verification.",
@@ -157,7 +156,7 @@ document.querySelectorAll("[data-theme-btn]").forEach((b) => {
   });
 });
 
-// ---------- sound: one audio context for click sounds and the ambient music ----------
+// ---------- click sounds, synthesized so there is nothing extra to load ----------
 let actx;
 
 function audio() {
@@ -191,164 +190,6 @@ function playClick(kind) {
 document.addEventListener("click", (e) => {
   const el = e.target.closest("a, button");
   if (el) playClick(el.matches("button") ? "tick" : "chime");
-});
-
-// Ambient music, generated live: a slow four-chord loop in A minor played by
-// detuned pads and a low root, with sparse bell notes drawn from the chord and
-// the A minor pentatonic scale, all through a long synthetic reverb.
-const BAR = 9;
-const CHORDS = [
-  { root: 45, pad: [57, 60, 64, 67, 71] }, // Am9
-  { root: 41, pad: [53, 57, 60, 64, 67] }, // Fmaj9
-  { root: 48, pad: [55, 59, 62, 64, 67] }, // Cmaj9
-  { root: 40, pad: [55, 59, 62, 64, 69] }, // Em11
-];
-const PENTATONIC = [69, 72, 74, 76, 79, 81, 84];
-const hz = (midi) => 440 * Math.pow(2, (midi - 69) / 12);
-let music = null;
-
-function reverbImpulse(ac, seconds) {
-  const len = Math.floor(ac.sampleRate * seconds);
-  const buf = ac.createBuffer(2, len, ac.sampleRate);
-  for (let ch = 0; ch < 2; ch++) {
-    const data = buf.getChannelData(ch);
-    for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3);
-  }
-  return buf;
-}
-
-function envelope(param, t, peak, attack, hold, release) {
-  param.setValueAtTime(0.0001, t);
-  param.exponentialRampToValueAtTime(peak, t + attack);
-  param.setValueAtTime(peak, t + hold);
-  param.exponentialRampToValueAtTime(0.0001, t + hold + release);
-}
-
-function playBar(m, chord, t) {
-  chord.pad.forEach((note) => {
-    [-6, 6].forEach((cents) => {
-      const osc = m.ac.createOscillator();
-      const gain = m.ac.createGain();
-      osc.type = "triangle";
-      osc.frequency.value = hz(note);
-      osc.detune.value = cents;
-      envelope(gain.gain, t, 0.03, 3, BAR, 4);
-      osc.connect(gain).connect(m.pad);
-      osc.start(t);
-      osc.stop(t + BAR + 4.1);
-    });
-  });
-  const bass = m.ac.createOscillator();
-  const gain = m.ac.createGain();
-  bass.type = "sine";
-  bass.frequency.value = hz(chord.root);
-  envelope(gain.gain, t, 0.12, 2.5, BAR, 3.5);
-  bass.connect(gain).connect(m.bus);
-  bass.start(t);
-  bass.stop(t + BAR + 3.6);
-}
-
-function playBell(m, t) {
-  const chord = CHORDS[Math.floor((t - m.start) / BAR) % CHORDS.length];
-  const notes = chord.pad.map((n) => n + 12).concat(PENTATONIC);
-  const note = notes[Math.floor(Math.random() * notes.length)];
-  const out = m.ac.createStereoPanner ? m.ac.createStereoPanner() : m.ac.createGain();
-  if (out.pan) out.pan.value = Math.random() * 1.2 - 0.6;
-  out.connect(m.bus);
-  [[1, 0.07], [2.01, 0.018]].forEach(([ratio, peak]) => {
-    const osc = m.ac.createOscillator();
-    const gain = m.ac.createGain();
-    osc.type = "sine";
-    osc.frequency.value = hz(note) * ratio;
-    gain.gain.setValueAtTime(0.0001, t);
-    gain.gain.exponentialRampToValueAtTime(peak, t + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t + 4);
-    osc.connect(gain).connect(out);
-    osc.start(t);
-    osc.stop(t + 4.1);
-  });
-}
-
-function schedule() {
-  const m = music;
-  const horizon = m.ac.currentTime + 1.5;
-  while (m.nextBar < horizon) {
-    playBar(m, CHORDS[m.bar % CHORDS.length], m.nextBar);
-    m.bar++;
-    m.nextBar += BAR;
-  }
-  while (m.nextBell < horizon) {
-    if (Math.random() > 0.25) playBell(m, m.nextBell);
-    m.nextBell += 1.2 + Math.random() * 2.6;
-  }
-}
-
-function startMusic() {
-  const ac = audio();
-  const t = ac.currentTime;
-  const out = ac.createGain();
-  out.gain.setValueAtTime(0.0001, t);
-  out.gain.exponentialRampToValueAtTime(0.8, t + 3);
-  out.connect(ac.createDynamicsCompressor()).connect(ac.destination);
-
-  const bus = ac.createGain();
-  const dry = ac.createGain();
-  const wet = ac.createGain();
-  const verb = ac.createConvolver();
-  dry.gain.value = 0.7;
-  wet.gain.value = 0.6;
-  verb.buffer = reverbImpulse(ac, 5);
-  bus.connect(dry).connect(out);
-  bus.connect(verb).connect(wet).connect(out);
-
-  // pads breathe through a lowpass filter that a very slow LFO opens and closes
-  const pad = ac.createBiquadFilter();
-  pad.type = "lowpass";
-  pad.frequency.value = 1100;
-  pad.connect(bus);
-  const lfo = ac.createOscillator();
-  const depth = ac.createGain();
-  lfo.frequency.value = 0.04;
-  depth.gain.value = 350;
-  lfo.connect(depth).connect(pad.frequency);
-  lfo.start(t);
-
-  music = { ac, out, bus, pad, lfo, start: t + 0.1, bar: 0, nextBar: t + 0.1, nextBell: t + 2.5 };
-  music.timer = setInterval(schedule, 250);
-  schedule();
-}
-
-function stopMusic() {
-  const m = music;
-  music = null;
-  clearInterval(m.timer);
-  const t = m.ac.currentTime;
-  m.out.gain.cancelScheduledValues(t);
-  m.out.gain.setValueAtTime(Math.max(m.out.gain.value, 0.0001), t);
-  m.out.gain.exponentialRampToValueAtTime(0.0001, t + 2);
-  m.lfo.stop(t + 2.1);
-  setTimeout(() => m.out.disconnect(), 2200);
-}
-
-const musicBtn = document.getElementById("music-toggle");
-let resumeOnShow = false;
-
-function setMusic(on) {
-  if (on === Boolean(music)) return;
-  try { on ? startMusic() : stopMusic(); } catch { return; }
-  musicBtn.setAttribute("aria-pressed", String(on));
-}
-
-musicBtn.addEventListener("click", () => setMusic(!music));
-
-// Background tabs throttle timers, so pause while hidden and pick up on return.
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    resumeOnShow = Boolean(music);
-    setMusic(false);
-  } else if (resumeOnShow) {
-    setMusic(true);
-  }
 });
 
 // ---------- canvas scenes ----------
