@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="showcase.css?v=6">
+  <link rel="stylesheet" href="showcase.css?v=7">
 </head>
 <body>
   <canvas id="c" aria-hidden="true"></canvas>
@@ -42,7 +42,7 @@
         <button type="button" data-theme-btn="black" aria-label="Dark"><i></i><span data-i18n="theme.black">深色</span></button>
         <button type="button" data-theme-btn="white" aria-label="Light"><i></i><span data-i18n="theme.white">浅色</span></button>
       </div>
-      <button class="music" id="music-toggle" type="button" aria-pressed="false" aria-label="Music" hidden>
+      <button class="music" id="music-toggle" type="button" aria-pressed="false" aria-label="Music">
         <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="music.label">音乐</span>
       </button>
       <button class="lang" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
@@ -338,11 +338,10 @@ $ ./gradlew :app:hotRunDebug --auto
           <span>github.com/ytlog</span>
         </a>
       </div>
-      <footer class="footer">© 2026 ytlog<span class="credit"><span data-i18n="music.credit">音乐</span>：千年之后（氛围版）· 开智小曲</span></footer>
+      <footer class="footer">© 2026 ytlog</footer>
     </section>
   </main>
 
-  <audio id="bgm" src="assets/bgm.mp3" preload="none" loop></audio>
-  <script src="showcase.js?v=7"></script>
+  <script src="showcase.js?v=8"></script>
 </body>
 </html>

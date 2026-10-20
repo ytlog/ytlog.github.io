@@ -71,7 +71,6 @@ main, .topbar { position: relative; z-index: 1; }
   font: 12px var(--sans); letter-spacing: .1em; color: var(--dim);
   background: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px;
 }
-.music[hidden] { display: none; }
 .music[aria-pressed="true"] { color: var(--fg); }
 .bars { display: flex; align-items: flex-end; gap: 2px; height: 10px; }
 .bars i { width: 2px; height: 3px; background: currentColor; }
@@ -223,7 +222,6 @@ main, .topbar { position: relative; z-index: 1; }
 }
 .outro .quote { margin-bottom: 44px; }
 .footer { margin-top: 10vh; text-align: center; font: 12px var(--sans); letter-spacing: .3em; color: var(--dim); }
-.credit { display: block; margin-top: 10px; letter-spacing: .15em; opacity: .8; }
 
 /* reveal on scroll */
 .reveal { opacity: 0; transform: translateY(15px); transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.2, .8, .2, 1); }
