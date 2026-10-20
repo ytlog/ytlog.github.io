@@ -178,6 +178,47 @@
           <img src="assets/flowa-tags.jpg" alt="通过标签整理零散想法" data-i18n-alt="flowa.alt3" width="598" height="1300" loading="lazy">
         </figure>
       </article>
+
+      <!-- Android Compose Hot Reload -->
+      <article class="project" id="compose-hotreload">
+        <div class="project-body">
+          <div class="project-head">
+            <h3>Compose Hot Reload</h3>
+            <span class="stars" data-repo="android-compose-hotreload" title="GitHub stars">★ <b>1</b></span>
+          </div>
+          <p class="tagline" data-i18n="hotreload.tagline">为 Android Compose 应用提供热重载：修改 Kotlin / Java 代码、Compose UI 与资源后，无需重装 APK、无需重启进程，即可应用到正在运行的 App。</p>
+          <ul class="points">
+            <li data-i18n="hotreload.p1">编辑 Compose UI 与函数实现，编译后直接在运行中的 App 里看到结果</li>
+            <li data-i18n="hotreload.p2">支持修改已有的字符串、颜色、图片与 assets 等 Android 资源</li>
+            <li data-i18n="hotreload.p3">基于 art-dcevm 在 ART 上重定义类，支持字段、方法与接口的增删改</li>
+            <li data-i18n="hotreload.p4">Gradle 插件接入；--auto 模式保存即重载，失败原因在 devtools 中查看</li>
+          </ul>
+          <dl class="facts">
+            <div><dt data-i18n="facts.platform">平台</dt><dd>Android 11+ · arm64</dd></div>
+            <div><dt data-i18n="facts.stack">技术</dt><dd>Kotlin · Gradle · ART</dd></div>
+            <div><dt data-i18n="facts.license">许可</dt><dd>Apache-2.0</dd></div>
+          </dl>
+          <div class="project-links">
+            <a class="btn primary" href="https://github.com/ytlog/android-compose-hotreload" target="_blank" rel="noopener" data-i18n="links.repo">查看仓库</a>
+            <a class="btn" href="https://github.com/ytlog/android-compose-hotreload/blob/main/docs/android.md" target="_blank" rel="noopener" data-i18n="hotreload.guide">使用指南</a>
+          </div>
+        </div>
+        <figure class="project-visual code-card" aria-label="Hot reload command">
+          <div class="code-bar"><span></span><span></span><span></span><em>terminal</em></div>
+<pre><code><span class="c" data-i18n="hotreload.c1"># 在应用项目根目录运行</span>
+$ ./gradlew :app:hotRunDebug --auto
+<span class="add" data-i18n="hotreload.c3">+ 保存 Kotlin 文件 → 编译 → 热重载</span>
+<span class="c" data-i18n="hotreload.c2"># 无需重装 APK，remember 状态尽量保留</span></code></pre>
+          <figcaption>
+            <ol class="flow">
+              <li data-i18n="hotreload.f1">Gradle 插件</li>
+              <li data-i18n="hotreload.f2">转换为 DEX</li>
+              <li data-i18n="hotreload.f3">设备端运行时</li>
+              <li data-i18n="hotreload.f4">ART 重定义 · 刷新 UI</li>
+            </ol>
+          </figcaption>
+        </figure>
+      </article>
     </section>
 
     <section id="focus" class="wrap section">
