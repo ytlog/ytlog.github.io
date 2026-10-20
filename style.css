@@ -101,7 +101,7 @@ h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.2; letter-spac
 .btn.primary:hover { transform: translateY(-1px); }
 
 /* at a glance */
-.glance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-bottom: 24px; }
+.glance { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding-bottom: 24px; }
 .glance-card {
   display: flex; flex-direction: column; gap: 2px; padding: 16px 18px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px;

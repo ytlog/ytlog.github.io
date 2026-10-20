@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ytlog · 作品集</title>
-  <meta name="description" content="ytlog 的开源作品：ART DCEVM（Android 运行时类结构热重定义）、mobby（在 Android 上运行 Code Agent）与随心记 Flowa（打开即写的速记应用）。">
+  <meta name="description" content="ytlog 的开源作品：ART DCEVM（Android 运行时类结构热重定义）、mobby（在 Android 上运行 Code Agent）、随心记 Flowa（打开即写的速记应用）与 Compose Hot Reload（Android Compose 热重载）。">
   <meta property="og:title" content="ytlog · Portfolio">
-  <meta property="og:description" content="ART DCEVM, mobby and Flowa — Android runtime, on-device agent and note-taking projects.">
+  <meta property="og:description" content="ART DCEVM, mobby, Flowa and Compose Hot Reload — Android runtime, on-device agent, note-taking and hot reload projects.">
   <meta property="og:image" content="https://ytlog.github.io/assets/mobby-poster-en.jpg">
   <link rel="icon" href="https://github.com/ytlog.png?size=64">
   <script>
@@ -16,7 +16,7 @@
       if (t === "black" || t === "white") document.documentElement.dataset.theme = t;
     })();
   </script>
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <header class="topbar">
@@ -42,7 +42,7 @@
       <div>
         <p class="eyebrow" data-i18n="hero.eyebrow">Android · 运行时 · 端侧 AI</p>
         <h1 data-i18n="hero.title">做贴近系统的 Android 工具</h1>
-        <p class="lede" data-i18n="hero.lede">我是 ytlog，一名 Android 开发者。正在做三件事：让 ART 支持运行中修改类结构，把 Code Agent 搬到手机上，以及一款打开即写的速记应用。</p>
+        <p class="lede" data-i18n="hero.lede">我是 ytlog，一名 Android 开发者。正在做几件事：让 ART 支持运行中修改类结构，为 Android Compose 带来热重载，把 Code Agent 搬到手机上，以及一款打开即写的速记应用。</p>
         <div class="hero-links">
           <a class="btn primary" href="#projects" data-i18n="hero.cta">看作品</a>
           <a class="btn" href="showcase.html"><span aria-hidden="true">✦</span>&nbsp;<span data-i18n="hero.showcase">沉浸版</span></a>
@@ -67,6 +67,11 @@
         <span class="glance-kind" data-i18n="kind.app">应用</span>
         <strong>Flowa</strong>
         <span data-i18n="flowa.short">打开即写的速记工具</span>
+      </a>
+      <a class="glance-card" href="#compose-hotreload">
+        <span class="glance-kind" data-i18n="kind.devtool">开发工具</span>
+        <strong>Compose Hot Reload</strong>
+        <span data-i18n="hotreload.short">Android Compose 热重载</span>
       </a>
     </section>
 
@@ -245,6 +250,6 @@ $ ./gradlew :app:hotRunDebug --auto
     <a href="showcase.html"><span aria-hidden="true">✦</span> <span data-i18n="footer.showcase">沉浸版作品集</span></a>
   </footer>
 
-  <script src="main.js?v=2"></script>
+  <script src="main.js?v=3"></script>
 </body>
 </html>
