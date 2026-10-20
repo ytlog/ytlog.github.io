@@ -189,13 +189,22 @@ main, .topbar { position: relative; z-index: 1; }
   filter: grayscale(1) contrast(1.05); border: 1px solid var(--line);
 }
 
-/* focus */
-.orbits {
-  max-width: 1100px; margin: 0 auto; padding: 40px 0 0; list-style: none;
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 34px 28px; text-align: center;
-  border-top: 1px solid var(--line);
+/* about: skill groups, selected work and stack */
+.sheet-grid.skills { grid-template-columns: repeat(3, 1fr); }
+.skills .sheet-col p { margin: 0 0 18px; color: var(--dim); font-size: 14px; line-height: 1.9; letter-spacing: .05em; }
+.sheet-col .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.sheet-col .tags li {
+  padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px;
+  font: 12.5px/1.6 var(--sans); letter-spacing: .06em;
 }
-.orbit { font-size: clamp(15px, 1.3vw, 18px); line-height: 1.7; letter-spacing: .14em; }
+.sheet-col .tags li::before { content: none; }
+.practice { max-width: 1100px; margin: 56px auto 0; border-top: 1px solid var(--line); padding-top: 40px; }
+.practice h3 { margin: 0 0 20px; font-size: 15px; font-weight: 400; letter-spacing: .3em; color: var(--dim); }
+.practice ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.practice li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.85; letter-spacing: .05em; }
+.practice li::before { content: ""; position: absolute; left: 0; top: .78em; width: 9px; height: 1px; background: var(--fg); }
+.stack-line { max-width: 1100px; margin: 48px auto 0; text-align: center; color: var(--dim); font: 13px/2 var(--mono); letter-spacing: .08em; }
+.stack-line span { margin-right: 14px; color: var(--fg); font-family: var(--sans); letter-spacing: .3em; }
 
 /* outro */
 .outro { justify-content: center; }
@@ -218,10 +227,6 @@ main, .topbar { position: relative; z-index: 1; }
 .scene-main .reveal:nth-child(5) { transition-delay: .6s; }
 .sheet-col.reveal:nth-child(2) { transition-delay: .15s; }
 .sheet-col.reveal:nth-child(3) { transition-delay: .3s; }
-.orbit.reveal:nth-child(5n+2) { transition-delay: .1s; }
-.orbit.reveal:nth-child(5n+3) { transition-delay: .2s; }
-.orbit.reveal:nth-child(5n+4) { transition-delay: .3s; }
-.orbit.reveal:nth-child(5n) { transition-delay: .4s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -230,7 +235,8 @@ main, .topbar { position: relative; z-index: 1; }
 
 @media (max-width: 860px) {
   .sheet-grid { grid-template-columns: 1fr; gap: 40px; }
-  .orbits { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
+  .practice ul { grid-template-columns: 1fr; gap: 14px; }
+  .sheet-grid.skills { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {

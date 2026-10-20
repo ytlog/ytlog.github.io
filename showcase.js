@@ -5,7 +5,7 @@ const EN = {
   "view.simple": "Overview",
   "music.label": "Music",
   "music.credit": "Music",
-  "hero.eyebrow": "Android · Runtime · On-device AI",
+  "hero.eyebrow": "Android · Infrastructure · AI engineering",
   "hero.title": "Android tools that work close to the system",
   "hero.lede": "I'm ytlog, an Android developer working on a few things: letting ART change class structure in a running app, hot reload for Android Compose, bringing coding agents to the phone, and a notebook you can write in the moment it opens.",
   "hero.cta": "See projects",
@@ -65,7 +65,20 @@ const EN = {
   "hotreload.f2": "Convert to DEX",
   "hotreload.f3": "Device runtime",
   "hotreload.f4": "ART redefine · refresh UI",
-  "focus.title": "Focus",
+  "about.title": "About",
+  "about.body": "I've spent years on Android client development, across product features, infrastructure, performance and stability. Lately I focus on AI-assisted development and cross-platform engineering, exploring the full loop from code generation and migration to on-device verification.",
+  "about.practice": "Selected work",
+  "about.p1": "Built performance and stability safeguards for client apps, so problems are found, diagnosed and fixed earlier",
+  "about.p2": "Developed IDE plugins and developer tools that bring AI into everyday engineering work",
+  "about.p3": "Explored cross-platform code migration and automated verification, using compile feedback and on-device runs to shorten the feedback loop",
+  "skills.title": "Core skills",
+  "skills.a.t": "Android fundamentals",
+  "skills.a.d": "Startup and smoothness optimization, stability work, core components and diagnostic tools",
+  "skills.b.t": "AI developer tools",
+  "skills.b.d": "Coding assistants, AI code review, unit test generation, knowledge retrieval and agent workflows",
+  "skills.c.t": "Cross-platform & engineering productivity",
+  "skills.c.d": "Cross-platform development with Kotlin Multiplatform and Compose, build optimization and CI pipelines",
+  "skills.stack": "Stack",
   "focus.1": "Android performance",
   "focus.2": "Android stability",
   "focus.3": "Agent development",
@@ -492,7 +505,7 @@ function drawHotReload() {
   }
 }
 
-// Scene 5: three tilted orbits around a pulsing core.
+// Scene 5: three tilted orbits around a pulsing core, one per skill group.
 function drawOrbits() {
   dot(cx, cy, (26 + Math.sin(time * 4) * 6) * s, 0.9);
   const rings = [

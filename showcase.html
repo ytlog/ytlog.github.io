@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&display=swap" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="showcase.css?v=3">
+  <link rel="stylesheet" href="showcase.css?v=4">
 </head>
 <body>
   <canvas id="c" aria-hidden="true"></canvas>
@@ -31,7 +31,7 @@
       <a class="chapter-link" href="#mobby" title="mobby">II</a>
       <a class="chapter-link" href="#flowa" title="Flowa">III</a>
       <a class="chapter-link" href="#compose-hotreload" title="Compose Hot Reload">IV</a>
-      <a class="chapter-link" href="#focus" title="Focus">V</a>
+      <a class="chapter-link" href="#about" title="About">V</a>
       <a class="view-link" href="./" data-i18n="view.simple">简洁版</a>
       <div class="theme-switch" role="group" aria-label="Theme">
         <button type="button" data-theme-btn="black" aria-label="Dark"><i></i><span data-i18n="theme.black">深色</span></button>
@@ -50,7 +50,7 @@
       <div class="scene-main">
         <p class="subtitle reveal">PORTFOLIO · YTLOG</p>
         <h1 class="cover-title reveal" data-i18n="hero.title">做贴近系统的 Android 工具</h1>
-        <p class="cover-desc reveal" data-i18n="hero.eyebrow">Android · 运行时 · 端侧 AI</p>
+        <p class="cover-desc reveal" data-i18n="hero.eyebrow">Android · 基础架构 · AI 工程化</p>
         <p class="cover-intro reveal" data-i18n="hero.lede">我是 ytlog，一名 Android 开发者。正在做几件事：让 ART 支持运行中修改类结构，为 Android Compose 带来热重载，把 Code Agent 搬到手机上，以及一款打开即写的速记应用。</p>
         <a class="pill reveal" href="#dcevm">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16.5 5 9.5l1.4-1.4 5.6 5.6 5.6-5.6L19 9.5z"/></svg>
@@ -271,28 +271,57 @@ $ ./gradlew :app:hotRunDebug --auto
     </section>
 
     <!-- Chapter V -->
-    <section class="scene" id="focus" data-scene="5">
+    <section class="scene" id="about" data-scene="5">
       <div class="scene-top">
         <span class="reveal">CHAPTER V</span>
-        <span class="reveal">Focus</span>
+        <span class="reveal" data-i18n="about.title">关于</span>
       </div>
       <div class="scene-main">
-        <h2 class="title reveal" data-i18n="focus.title">关注方向</h2>
+        <h2 class="title reveal" data-i18n="skills.title">核心能力</h2>
+        <p class="desc reveal" data-i18n="about.body">长期专注 Android 客户端研发，经验覆盖业务开发、基础架构、性能优化与稳定性治理。近年来聚焦 AI 辅助研发与跨端工程，探索从代码生成、工程迁移到运行验证的完整研发流程。</p>
+        <p class="quote reveal" data-i18n="hero.eyebrow">Android · 基础架构 · AI 工程化</p>
       </div>
     </section>
     <section class="sheet" data-scene="5">
-      <ul class="orbits">
-        <li class="orbit reveal" data-i18n="focus.1">Android 性能优化</li>
-        <li class="orbit reveal" data-i18n="focus.2">Android 稳定性优化</li>
-        <li class="orbit reveal" data-i18n="focus.3">智能体开发</li>
-        <li class="orbit reveal" data-i18n="focus.4">全栈开发</li>
-        <li class="orbit reveal" data-i18n="focus.5">端侧大模型</li>
-        <li class="orbit reveal" data-i18n="focus.6">APM 监控</li>
-        <li class="orbit reveal" data-i18n="focus.7">ART 虚拟机</li>
-        <li class="orbit reveal" data-i18n="focus.8">研发效能 · CI/CD</li>
-        <li class="orbit reveal" data-i18n="focus.9">Android 编译构建</li>
-        <li class="orbit reveal" data-i18n="focus.10">跨端开发</li>
-      </ul>
+      <div class="sheet-grid skills">
+        <div class="sheet-col reveal">
+          <h3><em>01</em><span data-i18n="skills.a.t">Android 基础技术</span></h3>
+          <p data-i18n="skills.a.d">启动与流畅性优化、稳定性治理、基础组件与诊断工具建设</p>
+          <ul class="tags">
+            <li data-i18n="focus.1">Android 性能优化</li>
+            <li data-i18n="focus.2">Android 稳定性优化</li>
+            <li data-i18n="focus.6">APM 监控</li>
+            <li data-i18n="focus.7">ART 虚拟机</li>
+          </ul>
+        </div>
+        <div class="sheet-col reveal">
+          <h3><em>02</em><span data-i18n="skills.b.t">AI 研发工具</span></h3>
+          <p data-i18n="skills.b.d">编程助手、智能代码评审、单测生成、知识检索与 Agent 工作流</p>
+          <ul class="tags">
+            <li data-i18n="focus.3">智能体开发</li>
+            <li data-i18n="focus.5">端侧大模型</li>
+          </ul>
+        </div>
+        <div class="sheet-col reveal">
+          <h3><em>03</em><span data-i18n="skills.c.t">跨端与工程效能</span></h3>
+          <p data-i18n="skills.c.d">Kotlin Multiplatform 与 Compose 跨端开发、构建优化与 CI 流程建设</p>
+          <ul class="tags">
+            <li data-i18n="focus.10">跨端开发</li>
+            <li data-i18n="focus.9">Android 编译构建</li>
+            <li data-i18n="focus.8">研发效能 · CI/CD</li>
+            <li data-i18n="focus.4">全栈开发</li>
+          </ul>
+        </div>
+      </div>
+      <div class="practice reveal">
+        <h3 data-i18n="about.practice">代表实践</h3>
+        <ul>
+          <li data-i18n="about.p1">建设客户端性能与稳定性保障体系，让问题更早被发现、定位和修复</li>
+          <li data-i18n="about.p2">开发 IDE 插件与研发辅助工具，把 AI 能力融入日常开发流程</li>
+          <li data-i18n="about.p3">探索跨端代码迁移与自动化验证，用编译反馈和真机运行缩短修改后的反馈周期</li>
+        </ul>
+      </div>
+      <p class="stack-line reveal"><span data-i18n="skills.stack">技术栈</span>Android · Kotlin · Java · C++ · KMP · Compose · Gradle · JVMTI / ART · Python · Go · AI Agent</p>
     </section>
 
     <!-- Outro -->
@@ -310,6 +339,6 @@ $ ./gradlew :app:hotRunDebug --auto
   </main>
 
   <audio id="bgm" src="assets/bgm.mp3" preload="none" loop></audio>
-  <script src="showcase.js?v=3"></script>
+  <script src="showcase.js?v=4"></script>
 </body>
 </html>
