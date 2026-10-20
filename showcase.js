@@ -178,6 +178,37 @@ musicBtn.addEventListener("click", () => {
   }
 });
 
+// ---------- click sounds, synthesized so there is nothing extra to load ----------
+// Buttons give a short tick; links give a soft two-note chime.
+let sfx;
+
+function playClick(kind) {
+  try {
+    sfx = sfx || new (window.AudioContext || window.webkitAudioContext)();
+    if (sfx.state === "suspended") sfx.resume();
+    const t = sfx.currentTime;
+    const notes = kind === "tick" ? [[1500, 0.05, 0.08]] : [[660, 0.07, 0.6], [990, 0.035, 0.45]];
+    notes.forEach(([freq, peak, length]) => {
+      const osc = sfx.createOscillator();
+      const gain = sfx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, t);
+      if (kind === "tick") osc.frequency.exponentialRampToValueAtTime(freq / 2, t + length);
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(peak, t + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + length);
+      osc.connect(gain).connect(sfx.destination);
+      osc.start(t);
+      osc.stop(t + length + 0.02);
+    });
+  } catch {}
+}
+
+document.addEventListener("click", (e) => {
+  const el = e.target.closest("a, button");
+  if (el) playClick(el.matches("button") ? "tick" : "chime");
+});
+
 // ---------- canvas scenes ----------
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
