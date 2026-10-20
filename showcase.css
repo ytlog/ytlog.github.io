@@ -166,6 +166,12 @@ main, .topbar { position: relative; z-index: 1; }
   filter: grayscale(1) contrast(1.05);
   border: 1px solid var(--line);
 }
+/* device cutout on a transparent background: no frame, just a soft shadow */
+.poster.devices { max-width: 980px; }
+.poster.devices img {
+  border: 0; border-radius: 0;
+  filter: grayscale(1) contrast(1.05) drop-shadow(0 24px 40px rgba(0, 0, 0, .35));
+}
 
 /* code sample and flow, monochrome take on the overview's code card */
 .code {
