@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="zh-CN" data-title-zh="在手机上写程序 · mobby" data-title-en="Coding on your phone · mobby">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在手机上写程序 · mobby</title>
+  <meta name="description" content="mobby 把 Linux 运行环境、Git、Node.js 和四个编程 Agent 装进手机：说出需求，Agent 在本机写代码、跑起来；写成 mobby 程序后按时运行、发通知、调用手机能力，权限由你逐项决定。" data-en="A Linux runtime, Git, Node.js and four coding agents on Android: describe what you need and the agent writes and runs code on the device, then turns it into a mobby program that runs on schedule, sends notifications and uses phone features with permissions you grant.">
+  <meta name="keywords" content="mobby, 手机写代码, 手机编程, AI 编程, Android Node.js, Claude Code Android, Codex Android, OpenCode, Pi, mobby 程序, on-device coding, coding on Android, AI coding agent">
+  <meta name="author" content="ytlog">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)">
+  <link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=zh">
+  <link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ytlog">
+  <meta property="og:url" content="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html">
+  <meta property="og:title" content="Coding on your phone · mobby">
+  <meta property="og:description" content="A Linux runtime, Git, Node.js and four coding agents on Android: describe what you need and the agent writes and runs code on the device, then turns it into a mobby program that runs on schedule, sends notifications and uses phone features with permissions you grant.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://ytlog.github.io/assets/mobby/og-coding.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="mobby: coding agents writing and running programs on an Android phone">
+  <meta property="article:published_time" content="2026-11-10">
+  <meta property="article:modified_time" content="2026-11-10">
+  <meta property="article:author" content="https://github.com/ytlog">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Coding on your phone · mobby">
+  <meta name="twitter:description" content="A Linux runtime, Git, Node.js and four coding agents on Android: describe what you need and the agent writes and runs code on the device, then turns it into a mobby program that runs on schedule, sends notifications and uses phone features with permissions you grant.">
+  <meta name="twitter:image" content="https://ytlog.github.io/assets/mobby/og-coding.png">
+  <link rel="icon" href="../assets/mobby-icon.svg">
+  <script>
+    (function () {
+      var root = document.documentElement, q = new URLSearchParams(location.search), t = q.get("theme"), l = q.get("lang"), fixed = l === "en" || l === "zh";
+      try { t = t || localStorage.getItem("theme"); l = l || localStorage.getItem("lang"); } catch (e) {}
+      if (t === "black" || t === "white") root.dataset.theme = t;
+      if (l !== "en" && l !== "zh") l = (navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+      root.dataset.lang = l;
+      root.classList.add("js");
+      if (l === "en") {
+        document.title = root.dataset.titleEn;
+        var d = document.querySelector('meta[name="description"]');
+        d.content = d.dataset.en;
+      }
+      // ?lang=zh and ?lang=en are the two language versions; each one is its own canonical URL.
+      if (fixed) {
+        var c = document.createElement("link");
+        c.rel = "canonical";
+        c.href = location.origin + location.pathname + "?lang=" + l;
+        document.head.appendChild(c);
+      }
+    })();
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://ytlog.github.io/articles/mobby-coding-on-your-phone.html#article",
+      "headline": "在手机上写程序",
+      "alternativeHeadline": "Coding on your phone",
+      "description": "mobby 把 Linux 运行环境、Git、Node.js 和四个编程 Agent 装进手机：说出需求，Agent 在本机写代码、跑起来；写成 mobby 程序后按时运行、发通知、调用手机能力，权限由你逐项决定。",
+      "inLanguage": [
+        "zh-CN",
+        "en"
+      ],
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "author": {
+        "@id": "https://ytlog.github.io/#person"
+      },
+      "publisher": {
+        "@id": "https://ytlog.github.io/#person"
+      },
+      "image": "https://ytlog.github.io/assets/mobby/og-coding.png",
+      "mainEntityOfPage": "https://ytlog.github.io/articles/mobby-coding-on-your-phone.html",
+      "isPartOf": {
+        "@id": "https://ytlog.github.io/articles/#articles"
+      },
+      "about": {
+        "@id": "https://ytlog.github.io/#mobby"
+      },
+      "keywords": "mobby, 手机写代码, 手机编程, AI 编程, Android Node.js, Claude Code Android, Codex Android, OpenCode, Pi, mobby 程序, on-device coding, coding on Android, AI coding agent"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ytlog.github.io/#person",
+      "name": "ytlog",
+      "url": "https://ytlog.github.io/",
+      "sameAs": [
+        "https://github.com/ytlog"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ytlog.github.io/#mobby",
+      "name": "mobby",
+      "description": "Runs Pi, Claude Code, Codex and OpenCode directly on Android, with access to the screen, photos and files.",
+      "operatingSystem": "Android 8.0+",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://github.com/ytlog/mobby",
+      "downloadUrl": "https://github.com/ytlog/mobby/releases",
+      "license": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ytlog",
+          "item": "https://ytlog.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "文章",
+          "item": "https://ytlog.github.io/articles/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "在手机上写程序",
+          "item": "https://ytlog.github.io/articles/mobby-coding-on-your-phone.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="stylesheet" href="../style.css?v=8">
+  <link rel="stylesheet" href="article.css?v=3">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a class="brand" href="../index.html">ytlog</a>
+        <span class="sep hide-sm">/</span>
+        <a class="hide-sm" href="./"><span data-l="zh">文章</span><span data-l="en">Articles</span></a>
+      </nav>
+      <nav class="nav">
+        <a class="nav-text" href="./"><span data-l="zh">全部文章</span><span data-l="en">All articles</span></a>
+        <button class="chip" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M4.8 19.2l2.1-2.1M17.1 6.9l2.1-2.1"/></svg>
+          <span class="chip-label" id="theme-label">深色</span>
+        </button>
+        <button class="chip" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================== 中文 ============================== -->
+  <main class="wrap" data-l="zh" lang="zh-CN">
+    <section class="a-hero">
+      <div>
+        <p class="eyebrow"><img src="../assets/mobby-icon.svg" alt="">mobby · 写程序</p>
+        <h1>在手机上写程序</h1>
+        <p class="lede">mobby 把一套 Linux 运行环境和四个编程 Agent 装进了手机。说清楚想要什么，Agent 就在本机写代码、跑起来、打开给你看。写成「程序」以后，还能装进 mobby，按时运行、发通知、接收分享。</p>
+        <p class="prompt"><small>你说</small>做一个旅行打包清单，按证件、衣物、电子和洗漱用品分类。可以勾选、添加、删除，刷新后还能保留。</p>
+        <ul class="badges">
+          <li><b>Pi · Claude Code · Codex · OpenCode</b></li>
+          <li>Git · Node.js · npm</li>
+          <li>无需 root</li>
+        </ul>
+        <p class="byline"><a href="https://github.com/ytlog" rel="author">ytlog</a> · <time datetime="2026-11-10">2026 年 11 月 10 日</time> · 约 6 分钟</p>
+      </div>
+      <figure class="stage">
+        <img src="../assets/mobby/travel-checklist-zh.gif" width="404" height="835" loading="lazy" decoding="async" alt="手机演示：Agent 写好旅行打包清单，在手机浏览器中打开并使用">
+        <figcaption>真机录屏精剪：Agent 写好页面和 Node 服务，在手机浏览器里打开</figcaption>
+      </figure>
+    </section>
+
+    <ol class="toc">
+      <li><a href="#devbox">口袋里的开发机</a></li>
+      <li><a href="#outputs">两种成果</a></li>
+      <li><a href="#program">mobby 程序</a></li>
+      <li><a href="#flow">从一句话到装上</a></li>
+      <li><a href="#caps">程序能做什么</a></li>
+      <li><a href="#perms">权限</a></li>
+      <li><a href="#examples">真实例子</a></li>
+      <li><a href="#limits">已知限制</a></li>
+    </ol>
+
+    <section class="chapter" id="devbox">
+      <div class="chapter-head">
+        <span class="num">01</span>
+        <h2>一台装在口袋里的开发机</h2>
+        <p>Agent 拿到的是一个真正的 Shell，不是只会回答代码问题的聊天框。</p>
+      </div>
+      <dl class="kv">
+        <div><dt>Agent</dt><dd>Pi · Claude Code · Codex · OpenCode</dd></div>
+        <div><dt>预装工具</dt><dd>Git · Node.js · npm</dd></div>
+        <div><dt>工作区</dt><dd>每个项目一个独立的 Git 目录</dd></div>
+        <div><dt>模型来源</dt><dd>各 Agent 原生登录，或你自己的 API 网关</dd></div>
+      </dl>
+      <div class="prose">
+        <p>mobby 内置一套基于 Termux 的运行环境。首次打开时，它会把工具和四个 Agent 装进应用自己的目录，并初始化 Git 工作区。之后，Agent 可以在这里读写文件、安装 npm 包、启动服务，也能运行它自己写的测试。</p>
+        <p>对话归属于项目，每个项目绑定一个固定目录。同一个对话里，Agent 会接着上一轮的会话继续。切换页面、把 mobby 放到后台，都不会打断正在运行的任务。</p>
+      </div>
+      <div class="note">
+        <p>Agent 以 mobby 的应用身份在 Android 沙箱里运行，不获取 root，也不改系统权限。它能动的文件，就是 mobby 自己的目录和你授权给它的文件夹。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="outputs">
+      <div class="chapter-head">
+        <span class="num">02</span>
+        <h2>两种成果：用一次的页面，长期在手机上的程序</h2>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <span class="kicker">网页与脚本</span>
+          <h3>写好、跑起来、在浏览器里打开</h3>
+          <p>最直接的用法：让 Agent 写一个页面和一个本地服务，启动后在手机浏览器里打开。上面的旅行清单就是这样做出来的，一共两个文件，不依赖任何第三方包。</p>
+          <p class="need"><a href="https://github.com/ytlog/mobby/tree/main/docs/examples/travel-checklist" target="_blank" rel="noopener">查看示例源码 →</a></p>
+        </article>
+        <article class="card featured">
+          <span class="kicker">mobby 程序</span>
+          <h3>装进 mobby，自己按时干活</h3>
+          <p>想让它长期留在手机上：有自己的页面，能在后台定时运行、发通知、存数据、调用手机能力，就写成 mobby 程序。装进去以后，权限、运行和记录都由 mobby 管，不用自己维护一个服务。</p>
+          <p class="need"><b>入口：</b>输入框「+」菜单 → 程序开发</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="program">
+      <div class="chapter-head">
+        <span class="num">03</span>
+        <h2>一个 mobby 程序长什么样</h2>
+        <p>它就是工作区里的一个文件夹：一份清单，一段后台逻辑，一个页面。</p>
+      </div>
+      <div class="split">
+        <figure class="code-card" aria-label="程序目录结构">
+          <div class="code-bar"><span></span><span></span><span></span><em>~/workspace/programs/expense-log</em></div>
+<pre><code>expense-log/
+├─ <span class="k">manifest.json</span>  <span class="c"># 名称、版本、权限、配置、事件订阅</span>
+├─ <span class="k">main.js</span>        <span class="c"># 后台逻辑：Node，按事件运行</span>
+└─ ui/
+   ├─ <span class="k">index.html</span>   <span class="c"># 页面：在 mobby 里打开</span>
+   └─ app.js</code></pre>
+        </figure>
+        <figure class="code-card" aria-label="后台逻辑示例">
+          <div class="code-bar"><span></span><span></span><span></span><em>main.js</em></div>
+<pre><code><span class="k">const</span> mobby = require(<span class="s">'mobby'</span>);
+
+mobby.on(<span class="s">'onSchedule'</span>, <span class="k">async</span> () =&gt; {
+  <span class="k">const</span> res = <span class="k">await</span> mobby.net.fetch(url);
+  <span class="k">await</span> mobby.sql.execute(<span class="s">'INSERT …'</span>);
+  <span class="k">await</span> mobby.notify.show({
+    title: <span class="s">'有更新'</span>, openUi: <span class="k">true</span> });
+});</code></pre>
+        </figure>
+      </div>
+      <ul class="pipe" aria-label="调用管线">
+        <li>页面 / 后台调用 SDK</li>
+        <li>认证调用方</li>
+        <li>校验参数</li>
+        <li class="hl">检查权限</li>
+        <li>写入操作记录</li>
+        <li>执行</li>
+      </ul>
+      <div class="prose" style="margin-top: 22px">
+        <p>后台逻辑和页面用的是同一套 SDK，每次调用都走同一条管线：先认证是谁在调用、检查参数，再看权限，写下操作记录，最后才真正执行。后台进程只在需要时启动，比如定时到了、页面发来消息、有人分享文字过来，空闲后自动退出。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="flow">
+      <div class="chapter-head">
+        <span class="num">04</span>
+        <h2>从一句话，到装在手机上</h2>
+        <p>你负责说清楚需求和点确认，写代码、检查、修改都交给手机上的 Agent。</p>
+      </div>
+      <ol class="steps">
+        <li><b>让 AI 写</b><span>打开<em>「+」→ 程序开发</em>，点「让 AI 写新程序」。没想好写什么，可以从「记账本」「每日提醒」「网页变化监控」这些想法开始，需求会填进输入框，改完再发。</span></li>
+        <li><b>它自己先检查</b><span>写完后 Agent 会校验清单和全部脚本的语法，再试运行一遍：网络、通知这类对外调用只做模拟，数据库写进临时库，结束就清理。结果以卡片显示在对话里。</span></li>
+        <li><b>一页确认安装</b><span>回到「我的程序」，新程序出现在「待处理」里，标着「AI 写好了，还没安装」。安装页用大白话列出它要的权限，比如「按时自动运行：每天 21:00」「发通知 · 可选」。填好必填配置，确认一次就装好并启用。</span></li>
+        <li><b>想改就说</b><span>在程序详情点「让 AI 修改此程序」，说出问题或新需求。改好后列表会提示「有新版本，多要 1 项权限」；更新时数据、配置和已有授权都保留，只需确认新增的部分。</span></li>
+      </ol>
+      <div class="note">
+        <p><b>装好之后从哪里打开？</b>左侧栏的「程序」分组、空对话页的程序图标、长按桌面 mobby 图标弹出的快捷方式，以及程序发出的通知，都能直接打开它的页面。程序还可以出现在系统分享面板里，接收别的应用分享过来的文字。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="caps">
+      <div class="chapter-head">
+        <span class="num">05</span>
+        <h2>程序能做什么</h2>
+        <p>每项能力都要在清单里申请，由你在安装时授予。</p>
+      </div>
+      <div class="caps">
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span>存数据</h3>
+          <p>键值、文件和 SQLite 数据库，都只属于这个程序。密钥放进加密存储。</p>
+          <ul><li>storage.kv</li><li>storage.files</li><li>storage.sql</li><li>secrets</li><li>config</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span>联网</h3>
+          <p>HTTP 请求和 WebSocket 长连接，按域名授权，默认只允许加密连接。</p>
+          <ul><li>net.http</li><li>net.websocket</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span>定时与提醒</h3>
+          <p>每天几点、每隔多久，到点在后台运行；发通知，点开直接进入程序页面。</p>
+          <ul><li>time.schedule</li><li>notify.show</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M7.5 7.5 12 3l4.5 4.5"/></svg></span>入口</h3>
+          <p>从别的应用分享文字过来，或者点一下桌面快捷方式，就运行程序里对应的处理逻辑。</p>
+          <ul><li>entry.share</li><li>entry.shortcut</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3zM18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></span>调用 AI</h3>
+          <p>安装时由你选择网关和模型，并设每日次数和 token 上限。目前只支持文字。</p>
+          <ul><li>ai.call</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span>手机能力</h3>
+          <p>复用 mobby 对话里同一套设备执行器，系统权限照常由 Android 询问。</p>
+          <ul><li class="plain">短信</li><li class="plain">联系人</li><li class="plain">日历</li><li class="plain">剪贴板</li><li class="plain">位置</li><li class="plain">传感器</li><li class="plain">授权目录</li></ul>
+        </div>
+        <div class="cap" style="grid-column: 1 / -1">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>读屏与点按</h3>
+          <p>知道哪个应用来到前台，读取它的界面，点按钮、填输入框、返回。授权按应用划分；对话里的 Agent 正在操作屏幕时，程序只能读，不能点；密码框和 mobby 自己的窗口永远碰不到。需要开启「mobby 屏幕操作」无障碍服务。</p>
+          <ul><li>screen.window</li><li>screen.read</li><li>screen.click</li><li>screen.tap</li><li>screen.type</li><li>screen.back</li><li>screen.home</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="perms">
+      <div class="chapter-head">
+        <span class="num">06</span>
+        <h2>权限：只给它需要的，随时可以收回</h2>
+        <p>程序由 AI 写成，所以 mobby 不默认信任它。</p>
+      </div>
+      <ul class="ticks prose" style="max-width: 820px">
+        <li><b>四层检查。</b>系统权限、全局开关、程序授权（范围和期限）、本次调用的上下文，任何一层不满足都不执行。</li>
+        <li><b>只能由你放宽。</b>程序可以申请权限，但授权只能由你在 mobby 里给。撤销或收窄授权，下一次调用立即生效。</li>
+        <li><b>网络按域名放行。</b>程序只能访问申请过并获准的域名，访问不了本机和局域网地址。</li>
+        <li><b>密钥不出门。</b>API 密钥存在加密存储里，代码里只写 <code>{{secret:name}}</code> 占位符，而且只会填给绑定的那个域名。</li>
+        <li><b>页面相互隔离。</b>每个程序的页面有独立的页面源和内容安全策略，拒绝弹窗和权限请求。</li>
+        <li><b>样样有记录。</b>程序详情里有运行记录、操作记录和日志。失败就显示失败，不会算作正常。</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="examples">
+      <div class="chapter-head">
+        <span class="num">07</span>
+        <h2>真实例子</h2>
+        <p>下面这些程序都只描述了需求，由手机上的 Pi 写成，再装到小米手机和平板上实测。</p>
+      </div>
+      <div class="examples">
+        <article class="example">
+          <h3>记账本 Expense Log</h3>
+          <p class="meta">storage.sql · time.schedule · notify.show</p>
+          <p>每天 21:00 提醒记账，币种在安装时填写。后来让 AI 加上 CSV 导出，更新时只需确认新增的「读写自己的文件」权限。</p>
+          <p class="result">原有记录都在，导出的 CSV 带表头和全部记录。</p>
+        </article>
+        <article class="example">
+          <h3>接口巡检 Header Watch</h3>
+          <p class="meta">net.http · secrets · storage.sql · notify.show</p>
+          <p>每 15 分钟带上凭据请求一个接口，把结果写进数据库并发通知，页面列出最近 20 条。</p>
+          <p class="result">熄屏、mobby 在后台，约 6 小时内 22 次定时运行全部正常结束。</p>
+        </article>
+        <article class="example">
+          <h3>跳过开屏广告</h3>
+          <p class="meta">screen.window · screen.read · screen.click</p>
+          <p>订阅应用切到前台的事件，看到「跳过」按钮就点掉。有的广告不理会无障碍点击，Pi 读了开发指南后自己改成模拟触摸。</p>
+          <p class="result">冷启动视频 App 后约 2–3 秒点掉广告，直接进入首页。</p>
+        </article>
+        <article class="example">
+          <h3>WebSocket 回显测试</h3>
+          <p class="meta">entry.shortcut · net.websocket · notify.show</p>
+          <p>点一下桌面快捷方式，连上回显服务，发送带时间的消息，收到一致的回显后发通知，并保留最近 20 次记录。</p>
+          <p class="result">通知「✓ Echo matched」，两次实测往返 2.2 秒和 3.4 秒。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="limits">
+      <div class="chapter-head">
+        <span class="num">08</span>
+        <h2>已知限制</h2>
+        <p>这些是现在做不到或还没验证的地方。</p>
+      </div>
+      <ul class="limits">
+        <li><b>后台运行</b><span>定时任务要系统允许 mobby 在后台运行。小米等系统默认会限制；「我的程序」会提示原因并带你到系统设置，mobby 不会自己改。</span></li>
+        <li><b>分享入口</b><span>目前只接收文字，图片和文件还不行。</span></li>
+        <li><b>调用 AI</b><span><code>ai.call</code> 目前只支持文字；由手机 AI 写程序调用它的完整流程还没在真机上验证。</span></li>
+        <li><b>读屏程序</b><span>需要无障碍服务。部分系统从最近任务里划掉 mobby 时，会把这个服务一起关掉。</span></li>
+        <li><b>代码质量</b><span>程序是 AI 写的，校验和试运行能拦下很多问题，但拦不住所有逻辑错误。遇到问题，把现象告诉它，让它修改。</span></li>
+      </ul>
+    </section>
+
+    <a class="next" href="mobby-ai-uses-your-phone.html">
+      <div>
+        <small>另一篇</small>
+        <strong>让 AI 替你操作手机</strong>
+        <span>Agent 在独立副屏上读屏、点按、输入，遇到登录和验证码时请你接手。</span>
+      </div>
+      <span class="go" aria-hidden="true">→</span>
+    </a>
+  </main>
+
+  <!-- ============================== English ============================== -->
+  <main class="wrap" data-l="en" lang="en">
+    <section class="a-hero">
+      <div>
+        <p class="eyebrow"><img src="../assets/mobby-icon.svg" alt="">mobby · Coding</p>
+        <h1>Coding on your phone</h1>
+        <p class="lede">mobby puts a Linux runtime and four coding agents on your phone. Describe what you need, and the agent writes the code on the device, runs it and opens it for you. Turn the result into a program and mobby keeps it installed, running on schedule, sending notifications and receiving shares.</p>
+        <p class="prompt"><small>You say</small>Make a travel packing list with categories for documents, clothes, electronics, and toiletries. Let me check off, add, and delete items, and keep my changes after a refresh.</p>
+        <ul class="badges">
+          <li><b>Pi · Claude Code · Codex · OpenCode</b></li>
+          <li>Git · Node.js · npm</li>
+          <li>No root</li>
+        </ul>
+        <p class="byline"><a href="https://github.com/ytlog" rel="author">ytlog</a> · <time datetime="2026-11-10">Nov 10, 2026</time> · 7 min read</p>
+      </div>
+      <figure class="stage">
+        <img src="../assets/mobby/travel-checklist-en.gif" width="404" height="835" loading="lazy" decoding="async" alt="Phone demo: the agent builds a travel packing list and it runs in the phone's browser">
+        <figcaption>Edited screen recording: the agent writes a page and a Node server, then opens it in the phone's browser</figcaption>
+      </figure>
+    </section>
+
+    <ol class="toc">
+      <li><a href="#devbox-en">A dev box in your pocket</a></li>
+      <li><a href="#outputs-en">Two kinds of results</a></li>
+      <li><a href="#program-en">mobby programs</a></li>
+      <li><a href="#flow-en">From a sentence to installed</a></li>
+      <li><a href="#caps-en">What programs can do</a></li>
+      <li><a href="#perms-en">Permissions</a></li>
+      <li><a href="#examples-en">Real examples</a></li>
+      <li><a href="#limits-en">Known limits</a></li>
+    </ol>
+
+    <section class="chapter" id="devbox-en">
+      <div class="chapter-head">
+        <span class="num">01</span>
+        <h2>A dev box in your pocket</h2>
+        <p>The agent gets a real shell, not a chat box that only talks about code.</p>
+      </div>
+      <dl class="kv">
+        <div><dt>Agents</dt><dd>Pi · Claude Code · Codex · OpenCode</dd></div>
+        <div><dt>Preinstalled</dt><dd>Git · Node.js · npm</dd></div>
+        <div><dt>Workspace</dt><dd>A separate Git folder per project</dd></div>
+        <div><dt>Models</dt><dd>Each agent's own sign-in, or your API gateway</dd></div>
+      </dl>
+      <div class="prose">
+        <p>mobby ships a runtime based on Termux. On first launch it installs the tools and the four agents into the app's own folder and initializes a Git workspace. From then on the agent can read and write files, install npm packages, start servers and run the tests it writes.</p>
+        <p>Conversations belong to projects, and each project has a fixed folder. Within a conversation the agent picks up its previous session. Switching pages or sending mobby to the background does not interrupt a running task.</p>
+      </div>
+      <div class="note">
+        <p>The agents run as the mobby app inside the Android sandbox, with no root and no changes to system permissions. They can touch mobby's own folders and the folders you grant, nothing else.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="outputs-en">
+      <div class="chapter-head">
+        <span class="num">02</span>
+        <h2>Two kinds of results: a page for now, a program that stays</h2>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <span class="kicker">Pages and scripts</span>
+          <h3>Write it, run it, open it in the browser</h3>
+          <p>The direct route: the agent writes a page and a local server, starts it and opens it in the phone's browser. The packing list above was made this way, in two files with no third-party packages.</p>
+          <p class="need"><a href="https://github.com/ytlog/mobby/tree/main/docs/examples/travel-checklist-en" target="_blank" rel="noopener">Browse the example code →</a></p>
+        </article>
+        <article class="card featured">
+          <span class="kicker">mobby programs</span>
+          <h3>Installed in mobby, working on its own</h3>
+          <p>When you want something to stay on the phone, with its own page, running in the background on a schedule, sending notifications, storing data and using phone features, make it a mobby program. Once installed, mobby handles permissions, runs and records, so there is no server to babysit.</p>
+          <p class="need"><b>Where:</b> the + menu in the message box → Program development</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="program-en">
+      <div class="chapter-head">
+        <span class="num">03</span>
+        <h2>What a mobby program looks like</h2>
+        <p>It is just a folder in the workspace: a manifest, some background logic and a page.</p>
+      </div>
+      <div class="split">
+        <figure class="code-card" aria-label="Program folder">
+          <div class="code-bar"><span></span><span></span><span></span><em>~/workspace/programs/expense-log</em></div>
+<pre><code>expense-log/
+├─ <span class="k">manifest.json</span>  <span class="c"># name, version, permissions, config, events</span>
+├─ <span class="k">main.js</span>        <span class="c"># background logic: Node, runs on events</span>
+└─ ui/
+   ├─ <span class="k">index.html</span>   <span class="c"># the page, opened inside mobby</span>
+   └─ app.js</code></pre>
+        </figure>
+        <figure class="code-card" aria-label="Background logic example">
+          <div class="code-bar"><span></span><span></span><span></span><em>main.js</em></div>
+<pre><code><span class="k">const</span> mobby = require(<span class="s">'mobby'</span>);
+
+mobby.on(<span class="s">'onSchedule'</span>, <span class="k">async</span> () =&gt; {
+  <span class="k">const</span> res = <span class="k">await</span> mobby.net.fetch(url);
+  <span class="k">await</span> mobby.sql.execute(<span class="s">'INSERT …'</span>);
+  <span class="k">await</span> mobby.notify.show({
+    title: <span class="s">'Updated'</span>, openUi: <span class="k">true</span> });
+});</code></pre>
+        </figure>
+      </div>
+      <ul class="pipe" aria-label="Call pipeline">
+        <li>Page / background calls the SDK</li>
+        <li>Authenticate caller</li>
+        <li>Validate arguments</li>
+        <li class="hl">Check permission</li>
+        <li>Record the operation</li>
+        <li>Execute</li>
+      </ul>
+      <div class="prose" style="margin-top: 22px">
+        <p>The background logic and the page share one SDK, and every call takes the same path: authenticate the caller, check the arguments and permission, write an operation record, and only then execute. The background process starts only when needed, for example when a schedule fires, the page sends a message or someone shares text to it, and exits when idle.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="flow-en">
+      <div class="chapter-head">
+        <span class="num">04</span>
+        <h2>From one sentence to installed on your phone</h2>
+        <p>You describe what you need and confirm. Writing, checking and fixing are up to the agent on your phone.</p>
+      </div>
+      <ol class="steps">
+        <li><b>Ask the AI to write it</b><span>Open <em>+ → Program development</em> and tap <b>Have the AI write a new program</b>. Short on ideas? Start from an expense log, a daily reminder or a web page watcher; the request lands in the message box for you to edit before sending.</span></li>
+        <li><b>It checks its own work</b><span>The agent validates the manifest and the syntax of every script, then does a dry run: network calls and notifications are simulated, database writes go to a temporary database that is cleaned up afterwards. Results show as a card in the chat.</span></li>
+        <li><b>Install on one page</b><span>Back in <b>Your programs</b>, the new program waits under pending, marked “Written by the AI, not installed yet”. The install page lists what it needs in plain words, such as “Run automatically: every day at 21:00” or “Send notifications · optional”. Fill in required settings and confirm once to install and enable it.</span></li>
+        <li><b>Change it any time</b><span>In the program's details, tap <b>Ask the AI to change this program</b> and describe the problem or new idea. The list then says a new version is ready and how many more permissions it asks for; updating keeps your data, settings and existing grants, so you approve only what is new.</span></li>
+      </ol>
+      <div class="note">
+        <p><b>Where to open it later.</b> The Programs group in the sidebar, the program icons on an empty conversation, the shortcuts when you long-press mobby's home-screen icon, and the program's own notifications all open its page directly. A program can also appear in the system share sheet to receive text from other apps.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="caps-en">
+      <div class="chapter-head">
+        <span class="num">05</span>
+        <h2>What programs can do</h2>
+        <p>Every capability is requested in the manifest and granted by you at install.</p>
+      </div>
+      <div class="caps">
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span>Store data</h3>
+          <p>Key-value pairs, files and a SQLite database, all private to the program. Keys and tokens go to encrypted storage.</p>
+          <ul><li>storage.kv</li><li>storage.files</li><li>storage.sql</li><li>secrets</li><li>config</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span>Go online</h3>
+          <p>HTTP requests and WebSocket connections, granted per domain, encrypted connections only by default.</p>
+          <ul><li>net.http</li><li>net.websocket</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span>Schedules and reminders</h3>
+          <p>Run in the background at a daily time or a fixed interval, and send notifications that open the program's page.</p>
+          <ul><li>time.schedule</li><li>notify.show</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M7.5 7.5 12 3l4.5 4.5"/></svg></span>Entry points</h3>
+          <p>Share text from another app, or tap a home-screen shortcut, to run the matching handler.</p>
+          <ul><li>entry.share</li><li>entry.shortcut</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3zM18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></span>Call AI</h3>
+          <p>You pick the gateway and model at install and cap daily calls and tokens. Text only for now.</p>
+          <ul><li>ai.call</li></ul>
+        </div>
+        <div class="cap">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span>Phone features</h3>
+          <p>The same device executors as mobby's chats; Android still asks for system permissions as usual.</p>
+          <ul><li class="plain">SMS</li><li class="plain">Contacts</li><li class="plain">Calendar</li><li class="plain">Clipboard</li><li class="plain">Location</li><li class="plain">Sensors</li><li class="plain">Granted folders</li></ul>
+        </div>
+        <div class="cap" style="grid-column: 1 / -1">
+          <h3><span class="icon-dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>Read and tap the screen</h3>
+          <p>Know which app comes to the front, read its interface, tap buttons, fill fields and go back. Access is granted per app. While an agent in a chat is using the screen, programs can only read; password fields and mobby's own windows are always off limits. Needs the “mobby Screen Control” accessibility service.</p>
+          <ul><li>screen.window</li><li>screen.read</li><li>screen.click</li><li>screen.tap</li><li>screen.type</li><li>screen.back</li><li>screen.home</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="perms-en">
+      <div class="chapter-head">
+        <span class="num">06</span>
+        <h2>Permissions: only what it needs, revocable any time</h2>
+        <p>Programs are written by AI, so mobby does not trust them by default.</p>
+      </div>
+      <ul class="ticks prose" style="max-width: 820px">
+        <li><b>Four checks.</b> System permission, a global switch, the program's grant (scope and expiry) and the context of the call. If any one fails, nothing runs.</li>
+        <li><b>Only you can widen.</b> A program can ask; only you grant, inside mobby. Revoke or narrow a grant and the very next call respects it.</li>
+        <li><b>Network by domain.</b> A program reaches only the domains it asked for and you allowed, never localhost or your local network.</li>
+        <li><b>Secrets stay put.</b> API keys live in encrypted storage. Code only contains a <code>{{secret:name}}</code> placeholder, filled in only for the domain it is bound to.</li>
+        <li><b>Isolated pages.</b> Each program's page has its own origin and a content security policy, and cannot open pop-ups or request permissions.</li>
+        <li><b>Everything is recorded.</b> Program details show runs, operations and logs. A failure shows as a failure, never as normal.</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="examples-en">
+      <div class="chapter-head">
+        <span class="num">07</span>
+        <h2>Real examples</h2>
+        <p>For each of these, only the need was described. Pi on the phone wrote the program, which was then tested on a Xiaomi phone and tablet.</p>
+      </div>
+      <div class="examples">
+        <article class="example">
+          <h3>Expense Log</h3>
+          <p class="meta">storage.sql · time.schedule · notify.show</p>
+          <p>A reminder to log expenses every day at 21:00, with the currency set at install. Later the AI added CSV export; updating asked only for the new file permission.</p>
+          <p class="result">Earlier records were kept, and the CSV had a header and every record.</p>
+        </article>
+        <article class="example">
+          <h3>Header Watch</h3>
+          <p class="meta">net.http · secrets · storage.sql · notify.show</p>
+          <p>Every 15 minutes, call an API with a stored credential, save the result and send a notification; the page lists the latest 20.</p>
+          <p class="result">With the screen off and mobby in the background, 22 scheduled runs over about 6 hours all finished normally.</p>
+        </article>
+        <article class="example">
+          <h3>Splash ad skipper</h3>
+          <p class="meta">screen.window · screen.read · screen.click</p>
+          <p>Watch for apps coming to the front and tap “Skip” when it appears. Some ads ignore accessibility clicks; after reading the developer guide, Pi switched to a simulated touch on its own.</p>
+          <p class="result">On a video app's cold start, the ad was skipped within about 2–3 seconds.</p>
+        </article>
+        <article class="example">
+          <h3>WebSocket echo</h3>
+          <p class="meta">entry.shortcut · net.websocket · notify.show</p>
+          <p>Tap a home-screen shortcut to connect to an echo server, send a timestamped message, notify once the echo matches, and keep the last 20 results.</p>
+          <p class="result">Notification “✓ Echo matched”; two runs took 2.2 s and 3.4 s round trip.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="limits-en">
+      <div class="chapter-head">
+        <span class="num">08</span>
+        <h2>Known limits</h2>
+        <p>What it cannot do yet, or what has not been verified.</p>
+      </div>
+      <ul class="limits">
+        <li><b>Background runs</b><span>Schedules need the system to let mobby run in the background. Xiaomi and others restrict this by default; Your programs explains why and opens the system setting. mobby does not change it for you.</span></li>
+        <li><b>Sharing</b><span>Only text can be shared to a program for now, not images or files.</span></li>
+        <li><b>Calling AI</b><span><code>ai.call</code> is text only, and a program written by the phone's AI calling it end to end has not been verified on a device.</span></li>
+        <li><b>Screen programs</b><span>Need the accessibility service. Some systems turn it off when mobby is swiped away from Recents.</span></li>
+        <li><b>Code quality</b><span>Programs are written by AI. Validation and dry runs catch a lot, but not every logic error; describe what you see and ask it to fix it.</span></li>
+      </ul>
+    </section>
+
+    <a class="next" href="mobby-ai-uses-your-phone.html">
+      <div>
+        <small>Also read</small>
+        <strong>Let AI use your phone</strong>
+        <span>The agent reads, taps and types on a separate virtual display, and hands control to you for sign-ins and verification.</span>
+      </div>
+      <span class="go" aria-hidden="true">→</span>
+    </a>
+  </main>
+
+  <footer class="wrap footer article-footer">
+    <span>© 2026 ytlog</span>
+    <a href="https://github.com/ytlog/mobby" target="_blank" rel="noopener">GitHub · ytlog/mobby</a>
+    <a href="./"><span data-l="zh">← 全部文章</span><span data-l="en">← All articles</span></a>
+  </footer>
+
+  <script src="article.js?v=3"></script>
+</body>
+</html>

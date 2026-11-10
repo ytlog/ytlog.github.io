@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="zh-CN" data-title-zh="让 AI 替你操作手机 · mobby" data-title-en="Let AI use your phone · mobby">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>让 AI 替你操作手机 · mobby</title>
+  <meta name="description" content="mobby 里的 Agent 读屏幕、点按、输入、翻页，在独立副屏上替你操作 App，无需 root、不用电脑；遇到密码、登录和验证码时请你接手，交还后自动继续。" data-en="An on-device AI agent that reads the screen, taps, types and moves between pages on a separate virtual display, with no root and no computer. It hands control back to you for passwords, sign-ins and verification, then carries on.">
+  <meta name="keywords" content="mobby, AI 操作手机, 手机 AI Agent, 手机自动化, Android 自动化, 无需 root, 无线调试, ADB 虚拟屏, 副屏, Claude Code, Codex, OpenCode, Pi, AI agent for Android, phone automation, virtual display">
+  <meta name="author" content="ytlog">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)">
+  <link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=zh">
+  <link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ytlog">
+  <meta property="og:url" content="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html">
+  <meta property="og:title" content="Let AI use your phone · mobby">
+  <meta property="og:description" content="An on-device AI agent that reads the screen, taps, types and moves between pages on a separate virtual display, with no root and no computer. It hands control back to you for passwords, sign-ins and verification, then carries on.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://ytlog.github.io/assets/mobby/og-phone.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="mobby: an AI agent operating apps on a separate virtual display of an Android phone">
+  <meta property="article:published_time" content="2026-11-10">
+  <meta property="article:modified_time" content="2026-11-10">
+  <meta property="article:author" content="https://github.com/ytlog">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Let AI use your phone · mobby">
+  <meta name="twitter:description" content="An on-device AI agent that reads the screen, taps, types and moves between pages on a separate virtual display, with no root and no computer. It hands control back to you for passwords, sign-ins and verification, then carries on.">
+  <meta name="twitter:image" content="https://ytlog.github.io/assets/mobby/og-phone.png">
+  <link rel="icon" href="../assets/mobby-icon.svg">
+  <script>
+    (function () {
+      var root = document.documentElement, q = new URLSearchParams(location.search), t = q.get("theme"), l = q.get("lang"), fixed = l === "en" || l === "zh";
+      try { t = t || localStorage.getItem("theme"); l = l || localStorage.getItem("lang"); } catch (e) {}
+      if (t === "black" || t === "white") root.dataset.theme = t;
+      if (l !== "en" && l !== "zh") l = (navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+      root.dataset.lang = l;
+      root.classList.add("js");
+      if (l === "en") {
+        document.title = root.dataset.titleEn;
+        var d = document.querySelector('meta[name="description"]');
+        d.content = d.dataset.en;
+      }
+      // ?lang=zh and ?lang=en are the two language versions; each one is its own canonical URL.
+      if (fixed) {
+        var c = document.createElement("link");
+        c.rel = "canonical";
+        c.href = location.origin + location.pathname + "?lang=" + l;
+        document.head.appendChild(c);
+      }
+    })();
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html#article",
+      "headline": "让 AI 替你操作手机",
+      "alternativeHeadline": "Let AI use your phone",
+      "description": "mobby 里的 Agent 读屏幕、点按、输入、翻页，在独立副屏上替你操作 App，无需 root、不用电脑；遇到密码、登录和验证码时请你接手，交还后自动继续。",
+      "inLanguage": [
+        "zh-CN",
+        "en"
+      ],
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "author": {
+        "@id": "https://ytlog.github.io/#person"
+      },
+      "publisher": {
+        "@id": "https://ytlog.github.io/#person"
+      },
+      "image": "https://ytlog.github.io/assets/mobby/og-phone.png",
+      "mainEntityOfPage": "https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html",
+      "isPartOf": {
+        "@id": "https://ytlog.github.io/articles/#articles"
+      },
+      "about": {
+        "@id": "https://ytlog.github.io/#mobby"
+      },
+      "keywords": "mobby, AI 操作手机, 手机 AI Agent, 手机自动化, Android 自动化, 无需 root, 无线调试, ADB 虚拟屏, 副屏, Claude Code, Codex, OpenCode, Pi, AI agent for Android, phone automation, virtual display"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ytlog.github.io/#person",
+      "name": "ytlog",
+      "url": "https://ytlog.github.io/",
+      "sameAs": [
+        "https://github.com/ytlog"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ytlog.github.io/#mobby",
+      "name": "mobby",
+      "description": "Runs Pi, Claude Code, Codex and OpenCode directly on Android, with access to the screen, photos and files.",
+      "operatingSystem": "Android 8.0+",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "url": "https://github.com/ytlog/mobby",
+      "downloadUrl": "https://github.com/ytlog/mobby/releases",
+      "license": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ytlog",
+          "item": "https://ytlog.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "文章",
+          "item": "https://ytlog.github.io/articles/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "让 AI 替你操作手机",
+          "item": "https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="stylesheet" href="../style.css?v=8">
+  <link rel="stylesheet" href="article.css?v=3">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a class="brand" href="../index.html">ytlog</a>
+        <span class="sep hide-sm">/</span>
+        <a class="hide-sm" href="./"><span data-l="zh">文章</span><span data-l="en">Articles</span></a>
+      </nav>
+      <nav class="nav">
+        <a class="nav-text" href="./"><span data-l="zh">全部文章</span><span data-l="en">All articles</span></a>
+        <button class="chip" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M4.8 19.2l2.1-2.1M17.1 6.9l2.1-2.1"/></svg>
+          <span class="chip-label" id="theme-label">深色</span>
+        </button>
+        <button class="chip" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================== 中文 ============================== -->
+  <main class="wrap" data-l="zh" lang="zh-CN">
+    <section class="a-hero">
+      <div>
+        <p class="eyebrow"><img src="../assets/mobby-icon.svg" alt="">mobby · 操作手机</p>
+        <h1>让 AI 替你操作手机</h1>
+        <p class="lede">在对话里加上「AI 操作手机」，说出想做的事。mobby 里的 Agent 会读屏幕、点按、输入、翻页，一步一步把它做完。它在一块独立的副屏上工作，你可以在旁边看着，也可以随时接手。</p>
+        <p class="prompt"><small>你说</small>去应用商店下载番茄ToDo，打开添加待办的功能。</p>
+        <ul class="badges">
+          <li><b>无需 root</b></li>
+          <li>不用电脑</li>
+          <li>副屏模式 · Android 13+</li>
+          <li>Pi · Claude Code · Codex · OpenCode</li>
+        </ul>
+        <p class="byline"><a href="https://github.com/ytlog" rel="author">ytlog</a> · <time datetime="2026-11-10">2026 年 11 月 10 日</time> · 约 6 分钟</p>
+      </div>
+      <figure class="stage">
+        <img src="../assets/mobby/app-feature-zh.gif" width="404" height="835" loading="lazy" decoding="async" alt="手机演示：Agent 从应用商店安装番茄ToDo 并打开添加待办页面">
+        <figcaption>真机录屏精剪 · 小米手机 Android 13</figcaption>
+      </figure>
+    </section>
+
+    <ol class="toc">
+      <li><a href="#how">一次操作怎样完成</a></li>
+      <li><a href="#modes">三种屏幕模式</a></li>
+      <li><a href="#virtual">副屏</a></li>
+      <li><a href="#handoff">需要你的时候</a></li>
+      <li><a href="#safety">安全边界</a></li>
+      <li><a href="#start">开始使用</a></li>
+      <li><a href="#limits">已知限制</a></li>
+    </ol>
+
+    <section class="chapter" id="how">
+      <div class="chapter-head">
+        <span class="num">01</span>
+        <h2>每一步都先看清，再动手</h2>
+        <p>Agent 不靠记忆盲点。它每做一步都要读一次屏幕，动作做完再读一次，确认页面真的变了。</p>
+      </div>
+      <ol class="loop">
+        <li><b>读屏</b><span>控件树告诉它页面上有哪些按钮、输入框和文字；截图补上没有文字描述的部分。</span></li>
+        <li><b>判断</b><span>对照你的目标，决定下一步：该点哪里、该填什么、要不要返回。</span></li>
+        <li><b>动作</b><span>打开应用、点按、输入文字、滑动、返回，一次只做一件事。</span></li>
+        <li><b>核对</b><span>再读一次屏幕。目标页面没有出现，就不算成功。</span></li>
+      </ol>
+      <p class="loop-back">循环往复，直到任务完成，或者需要你来决定。</p>
+      <div class="prose">
+        <p>每个动作都会作为一张卡片出现在对话里，和 Agent 的思考、回复按发生顺序排在一起。运行时卡片展开，结束后自动折叠，点标题可以重新查看当时的画面和结果。</p>
+        <p>结果说不准的时候，mobby 会如实标出来，不会显示成成功。<strong>已经发出去的点按和输入不会被自动重放</strong>，避免重复下单、重复发送这类副作用。连接断了要恢复时，Agent 也得先重新读屏，才能继续动手。</p>
+      </div>
+      <div class="note">
+        <p><b>做过的流程可以记住。</b>Agent 可以把一段通过验收的点按和输入封存成流程，下次按编号回放。回放前会先核对当前的应用、页面结构和目标控件，对不上就停下，不会盲点。流程里只保存控件名称、动作和页面结构摘要，不保存你输入的文字。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="modes">
+      <div class="chapter-head">
+        <span class="num">02</span>
+        <h2>三种屏幕模式，按你的手机来选</h2>
+        <p>在「设置 → 运行环境 → 屏幕操作模式」里，选择 Agent 在哪块屏幕上工作。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card featured">
+          <span class="flag">推荐</span>
+          <span class="kicker">虚拟屏幕 · 内置 ADB</span>
+          <h3>它在副屏上忙，你照常用手机</h3>
+          <p>Agent 在一块看不见的副屏上打开和操作应用，你留在 mobby 里看预览。ADB 客户端就在 mobby 里，不用装其他 App，也不用连电脑。</p>
+          <p class="need"><b>需要：</b>Android 13 及以上；开启系统「无线调试」，并在 mobby 里配对一次。</p>
+        </article>
+        <article class="card">
+          <span class="kicker">当前屏幕 · 无障碍</span>
+          <h3>直接操作你眼前这块屏幕</h3>
+          <p>执行时 mobby 隐藏自己的悬浮层并保持亮屏。任务进行时，手机交给它来操作。适合 Android 12 及以下，或者系统没有无线调试的机型。</p>
+          <p class="need"><b>需要：</b>开启「mobby 屏幕操作」无障碍服务和任务通知。</p>
+        </article>
+        <article class="card">
+          <span class="kicker">虚拟屏幕 · root</span>
+          <h3>同样的副屏，权限来自 root</h3>
+          <p>默认置灰。点「检查 Root 权限」，在超级用户管理器里同意后才能选择。mobby 不会帮你 root 手机，也不改系统权限。</p>
+          <p class="need"><b>需要：</b>Android 13 及以上，设备本身已经有 <code>su</code>。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="virtual">
+      <div class="chapter-head">
+        <span class="num">03</span>
+        <h2>副屏：它在旁边干活，你继续用手机</h2>
+        <p>选好虚拟屏模式后，每个任务都有一块自己的屏幕。</p>
+      </div>
+      <figure class="screens" aria-label="主屏与副屏示意">
+        <div>
+          <div class="device">
+            <div class="glass">
+              <div class="mock-bar"><i></i>mobby</div>
+              <div class="mock-msg me">帮我在购物 App 里搜一下登山鞋，按销量排序</div>
+              <div class="mock-step">打开购物 App</div>
+              <div class="mock-step">点击搜索框</div>
+              <div class="mock-step">输入「登山鞋」</div>
+              <div class="mock-step run">点击「销量」</div>
+              <div class="mock-pip" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p class="device-label"><b>主屏 · 你</b>留在 mobby 里，右上角是实时预览</p>
+        </div>
+        <div class="link-arrow">
+          <svg viewBox="0 0 64 20" aria-hidden="true"><path d="M2 10h56M52 4l7 6-7 6"/></svg>
+          读屏 · 点按 · 输入<br>只发生在副屏
+        </div>
+        <div>
+          <div class="device virtual">
+            <div class="glass">
+              <div class="mock-app">
+                <div class="head">购物 App</div>
+                <div class="rows"><span></span><span></span><span class="hit"></span><span></span><span></span><span></span></div>
+              </div>
+              <span class="tap" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="device-label"><b>副屏 · Agent</b>720×1280 独立显示，你看不见它</p>
+        </div>
+      </figure>
+      <div class="prose">
+        <p>任务开始时，mobby 会创建一块 720×1280 的独立显示屏。Agent 先找到目标应用，把它启动到这块副屏上；之后的读屏、点按、滑动都只发生在这里，碰不到你的主屏。</p>
+      </div>
+      <ul class="ticks prose">
+        <li><b>随时看得到。</b>任务运行时，mobby 各个页面的右上角都有可以收起的副屏预览。授予悬浮窗权限后，离开 mobby 也会以系统小窗继续显示。</li>
+        <li><b>导航只在副屏里。</b>副屏有自己的「主页」和「最近任务」，只列出副屏里的应用和任务，不会把你的桌面翻出来。</li>
+        <li><b>用完就收。</b>任务结束、停止或者连接断开，副屏和里面的任务一起释放。</li>
+      </ul>
+      <div class="note">
+        <p><b>副屏不是应用分身。</b>应用在副屏里用的还是你手机上原来的登录和数据。少数应用会自己跳回主屏，或者只允许一个实例；遇到这种情况，mobby 会明确报告，而不会把任务挪到你的主屏上继续做。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="handoff">
+      <div class="chapter-head">
+        <span class="num">04</span>
+        <h2>需要你的时候，它会停下来等你</h2>
+        <p>登录、验证码、滑块这些步骤，Agent 不该替你做主，很多时候也做不了。遇到时它会请你处理，你处理完，它接着做。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <div class="icon-dot"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></div>
+          <h3>私密输入</h3>
+          <p>Agent 指出要填的输入框，并说明原因。你在 mobby 的弹窗里填写，内容直接写进副屏的输入框。Agent 读屏时看不到原值，这段时间截图也会暂停提供给它。</p>
+          <p class="need"><b>适合：</b>密码、验证码、身份信息。</p>
+        </article>
+        <article class="card">
+          <div class="icon-dot"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5A5.5 5.5 0 0 1 12.5 21h-1a5.5 5.5 0 0 1-4.6-2.5L4.5 14.8a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg></div>
+          <h3>接手副屏</h3>
+          <p>进入全屏的接手页，直接点按、拖动、返回副屏上的应用。点到输入框时，用手机自己的键盘打字，和平时一样。</p>
+          <p class="need"><b>适合：</b>滑块验证、手动获取验证码、需要你亲自选的步骤。</p>
+        </article>
+      </div>
+      <ol class="timeline" style="margin-top: 32px">
+        <li><b>Agent 请求帮助</b><span>弹窗写明要填哪个字段、为什么需要你。它不会在聊天里罗列选项等你回复，而是直接请你接手。</span></li>
+        <li><b>你接手，它立刻停手</b><span>你控制副屏期间，Agent 的读屏和点按都会被拒绝，不排队，也不会跟你抢屏幕。</span></li>
+        <li><b>你交还，它重新看一遍</b><span>mobby 清掉接手期间的旧画面，要求 Agent 先重新读屏，再决定下一步。</span></li>
+        <li><b>自动继续</b><span>就算 Agent 已经结束了这一轮，mobby 也会在你交还后替你发一句「我已在副屏完成操作，请继续」。不用再手动催它。</span></li>
+      </ol>
+      <div class="note warn">
+        <p>用手机键盘输入的内容，交还后 Agent 读屏能看到。需要保密的内容，请用接手页里的「输入文字」，它走的是私密输入通道。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="safety">
+      <div class="chapter-head">
+        <span class="num">05</span>
+        <h2>权限只给屏幕，动作都有边界</h2>
+        <p>能操作手机的权限很大，所以 mobby 把它关在一个很小的范围里。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <h3>只给屏幕进程提权</h3>
+          <p>ADB 或 root 权限只交给一个独立的屏幕工作进程。四个 Agent、Shell 和其他功能仍然是普通应用身份，跑在 Android 沙箱里。</p>
+        </article>
+        <article class="card">
+          <h3>只开放固定动作</h3>
+          <p>工作进程只监听本机 127.0.0.1，用每次随机生成的令牌认证；只提供读屏、点按、输入、滑动等固定操作，没有执行任意命令的入口。</p>
+        </article>
+        <article class="card">
+          <h3>每一步重新验明身份</h3>
+          <p>内置 ADB 模式下，每次操作前都会用同一配对身份重新认证本机 ADB。无线调试一关，操作立刻失败并说明原因；配对保留，重新打开后在同一个任务里就能续上。</p>
+        </article>
+        <article class="card">
+          <h3>配对凭据加密保存</h3>
+          <p>ADB 身份私钥用 Android Keystore 加密保存；六位配对码只在内存里用一次，不写入磁盘，也不进日志。</p>
+        </article>
+        <article class="card">
+          <h3>不碰密码框</h3>
+          <p>Agent 的文字输入会拒绝密码框。受系统保护的画面（例如部分支付页面）在截图里是黑的，mobby 不会绕过。</p>
+        </article>
+        <article class="card">
+          <h3>按对话授权</h3>
+          <p>屏幕权限跟着单个对话走。移除「AI 操作手机」标签后，下一次操作要重新确认。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="start">
+      <div class="chapter-head">
+        <span class="num">06</span>
+        <h2>开始使用</h2>
+        <p>第一次配置大约几分钟，以后打开对话就能用。</p>
+      </div>
+      <ol class="steps">
+        <li><b>打开屏幕设置</b><span>进入<em>设置 → 运行环境 → 屏幕操作模式</em>。Android 13 及以上会预选「虚拟屏幕（内置 ADB）」，确认后才会保存。</span></li>
+        <li><b>跟着向导一步步来</b><span>通知、Wi-Fi、开发者选项、无线调试，一次只处理一项，并附有不同品牌手机的说明。已经满足的步骤会自动跳过。</span></li>
+        <li><b>完成配对</b><span>开启无障碍后可以点「自动配对」，mobby 会读取系统弹窗里的六位配对码；也可以在通知里手动输入。</span></li>
+        <li><b>在对话里加上「AI 操作手机」</b><span>空对话页就有这个入口，平板上叫「AI 操作平板」。然后像平时聊天一样，说出要做的事。</span></li>
+      </ol>
+      <div class="note">
+        <p><b>配对只需要一次。</b>只要无线调试开着，mobby 会用保存的配对自动重连。手机重启后系统通常会关掉无线调试，重新打开即可；只有系统忘了这次配对，才需要再配一遍。</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="limits">
+      <div class="chapter-head">
+        <span class="num">07</span>
+        <h2>已知限制</h2>
+        <p>这些是现在做不到或还没验证的地方。</p>
+      </div>
+      <ul class="limits">
+        <li><b>系统版本</b><span>副屏模式需要 Android 13 及以上，手机要保持亮屏、解锁。更早的系统请用当前屏幕模式。</span></li>
+        <li><b>厂商差异</b><span>部分华为 EMUI / HarmonyOS 版本没有无线调试开关，只能使用无障碍模式。各家系统的配对弹窗也不完全一样，自动配对认不出时会改用通知输入。</span></li>
+        <li><b>应用行为</b><span>有的应用会自己跳回主屏，或者只允许一个实例，这时无法在副屏里隔离运行。</span></li>
+        <li><b>画面与识别</b><span>预览是按需刷新的画面，不是视频流。没有文字描述的自绘界面只能依靠截图和坐标操作，目前没有 OCR。</span></li>
+        <li><b>并发</b><span>同一时间只运行一个副屏任务；切换屏幕模式要等任务结束。</span></li>
+        <li><b>root 模式</b><span>还没有在已 root 的真机上完成验收。</span></li>
+      </ul>
+    </section>
+
+    <a class="next" href="mobby-coding-on-your-phone.html">
+      <div>
+        <small>下一篇</small>
+        <strong>在手机上写程序</strong>
+        <span>Agent 在本机写代码、跑起来；写成程序后还能装进 mobby，按时运行、发通知。</span>
+      </div>
+      <span class="go" aria-hidden="true">→</span>
+    </a>
+  </main>
+
+  <!-- ============================== English ============================== -->
+  <main class="wrap" data-l="en" lang="en">
+    <section class="a-hero">
+      <div>
+        <p class="eyebrow"><img src="../assets/mobby-icon.svg" alt="">mobby · Using your phone</p>
+        <h1>Let AI use your phone</h1>
+        <p class="lede">Add <b>AI controls phone</b> to a conversation and say what you want done. The agent inside mobby reads the screen, taps, types and moves between pages until the job is finished. It works on a separate virtual display, so you can watch it, or step in at any time.</p>
+        <p class="prompt"><small>You say</small>Install Via browser from the app store and open Bookmarks.</p>
+        <ul class="badges">
+          <li><b>No root</b></li>
+          <li>No computer</li>
+          <li>Virtual display · Android 13+</li>
+          <li>Pi · Claude Code · Codex · OpenCode</li>
+        </ul>
+        <p class="byline"><a href="https://github.com/ytlog" rel="author">ytlog</a> · <time datetime="2026-11-10">Nov 10, 2026</time> · 7 min read</p>
+      </div>
+      <figure class="stage">
+        <img src="../assets/mobby/app-feature-en.gif" width="404" height="835" loading="lazy" decoding="async" alt="Phone demo: the agent installs Via browser and opens Bookmarks">
+        <figcaption>Edited screen recording · Xiaomi phone, Android 13</figcaption>
+      </figure>
+    </section>
+
+    <ol class="toc">
+      <li><a href="#how-en">How a step works</a></li>
+      <li><a href="#modes-en">Three screen modes</a></li>
+      <li><a href="#virtual-en">The virtual display</a></li>
+      <li><a href="#handoff-en">When it needs you</a></li>
+      <li><a href="#safety-en">Safety limits</a></li>
+      <li><a href="#start-en">Getting started</a></li>
+      <li><a href="#limits-en">Known limits</a></li>
+    </ol>
+
+    <section class="chapter" id="how-en">
+      <div class="chapter-head">
+        <span class="num">01</span>
+        <h2>Look first, then act, every single step</h2>
+        <p>The agent never taps from memory. It reads the screen before each action and again afterwards, to confirm the page really changed.</p>
+      </div>
+      <ol class="loop">
+        <li><b>Read</b><span>The view tree lists the buttons, fields and text on the page; a screenshot covers anything without a description.</span></li>
+        <li><b>Decide</b><span>It compares the page with your goal and picks the next move: where to tap, what to type, whether to go back.</span></li>
+        <li><b>Act</b><span>Open an app, tap, type, swipe or go back: one action at a time.</span></li>
+        <li><b>Check</b><span>It reads the screen again. If the expected page did not appear, the step did not succeed.</span></li>
+      </ol>
+      <p class="loop-back">The loop repeats until the task is done, or until a decision belongs to you.</p>
+      <div class="prose">
+        <p>Every action appears as a card in the conversation, in order with the agent's reasoning and replies. Cards expand while they run and fold when done; tap a title to see the screen and result from that moment.</p>
+        <p>When an outcome is uncertain, mobby says so instead of showing success. <strong>A tap or input that has already been sent is never replayed automatically</strong>, so nothing gets ordered or sent twice. After a dropped connection, the agent must read the screen again before it may act.</p>
+      </div>
+      <div class="note">
+        <p><b>Finished flows can be remembered.</b> The agent can save a verified series of taps and inputs as a workflow and replay it by ID later. Before replaying, it checks the current app, page structure and target controls, and stops if they do not match. A workflow keeps control names, actions and a structural summary of each page, never the text you typed.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="modes-en">
+      <div class="chapter-head">
+        <span class="num">02</span>
+        <h2>Three screen modes, chosen for your phone</h2>
+        <p>Under <b>Settings → Runtime → Screen control mode</b>, choose which screen the agent works on.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card featured">
+          <span class="flag">Recommended</span>
+          <span class="kicker">Virtual display · Built-in ADB</span>
+          <h3>It works on its own screen while you keep using yours</h3>
+          <p>The agent opens and operates apps on a hidden second display while you watch a live preview in mobby. The ADB client ships inside mobby: no extra app, no computer.</p>
+          <p class="need"><b>Needs:</b> Android 13 or later; turn on Wireless debugging and pair once inside mobby.</p>
+        </article>
+        <article class="card">
+          <span class="kicker">Current screen · Accessibility</span>
+          <h3>It works on the screen in front of you</h3>
+          <p>mobby hides its own overlays and keeps the screen on while it acts, so hand the phone over for the duration. Best for Android 12 and earlier, or phones without wireless debugging.</p>
+          <p class="need"><b>Needs:</b> the mobby Screen Control accessibility service and task notifications.</p>
+        </article>
+        <article class="card">
+          <span class="kicker">Virtual display · Root</span>
+          <h3>The same virtual display, powered by root</h3>
+          <p>Disabled by default. Tap <b>Check root permission</b> and approve in your superuser manager to enable it. mobby never roots your phone or changes system permissions.</p>
+          <p class="need"><b>Needs:</b> Android 13 or later, and a device that already has <code>su</code>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="virtual-en">
+      <div class="chapter-head">
+        <span class="num">03</span>
+        <h2>The virtual display: it works beside you</h2>
+        <p>With a virtual mode selected, every task gets a screen of its own.</p>
+      </div>
+      <figure class="screens" aria-label="Main screen and virtual display">
+        <div>
+          <div class="device">
+            <div class="glass">
+              <div class="mock-bar"><i></i>mobby</div>
+              <div class="mock-msg me">Search for hiking boots in the shopping app and sort by sales</div>
+              <div class="mock-step">Open shopping app</div>
+              <div class="mock-step">Tap the search box</div>
+              <div class="mock-step">Type "hiking boots"</div>
+              <div class="mock-step run">Tap "Sales"</div>
+              <div class="mock-pip" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p class="device-label"><b>Main screen · You</b>Stay in mobby, with a live preview in the corner</p>
+        </div>
+        <div class="link-arrow">
+          <svg viewBox="0 0 64 20" aria-hidden="true"><path d="M2 10h56M52 4l7 6-7 6"/></svg>
+          Reads, taps and typing<br>stay on the virtual display
+        </div>
+        <div>
+          <div class="device virtual">
+            <div class="glass">
+              <div class="mock-app">
+                <div class="head">Shopping app</div>
+                <div class="rows"><span></span><span></span><span class="hit"></span><span></span><span></span><span></span></div>
+              </div>
+              <span class="tap" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="device-label"><b>Virtual display · Agent</b>A separate 720×1280 display you never see</p>
+        </div>
+      </figure>
+      <div class="prose">
+        <p>When a task starts, mobby creates a separate 720×1280 display. The agent finds the target app and launches it there; from then on every read, tap and swipe happens on that display and never touches your main screen.</p>
+      </div>
+      <ul class="ticks prose">
+        <li><b>Always visible.</b> While a task runs, every mobby page shows a collapsible preview in the top-right corner. With overlay permission, it stays on as a small system window after you leave mobby.</li>
+        <li><b>Navigation stays inside.</b> The virtual display has its own Home and Recents that list only its own apps and tasks; your launcher is never touched.</li>
+        <li><b>Gone when done.</b> When the task ends, is stopped or loses its connection, the display and everything on it are released.</li>
+      </ul>
+      <div class="note">
+        <p><b>It is not an app clone.</b> Apps on the virtual display use the same sign-ins and data as on your phone. A few apps jump back to the main screen on their own or allow only one instance; mobby reports that plainly instead of moving the task onto your main screen.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="handoff-en">
+      <div class="chapter-head">
+        <span class="num">04</span>
+        <h2>When it needs you, it stops and waits</h2>
+        <p>Sign-ins, verification codes and slider checks are not the agent's call, and often it cannot do them anyway. It asks you to handle them, then carries on.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <div class="icon-dot"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg></div>
+          <h3>Private input</h3>
+          <p>The agent names the field to fill and why. You type into a dialog in mobby and the value goes straight into the field on the virtual display. The agent never sees the original value when it reads the screen, and screenshots are withheld from it meanwhile.</p>
+          <p class="need"><b>Use it for:</b> passwords, verification codes, personal details.</p>
+        </article>
+        <article class="card">
+          <div class="icon-dot"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5A5.5 5.5 0 0 1 12.5 21h-1a5.5 5.5 0 0 1-4.6-2.5L4.5 14.8a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg></div>
+          <h3>Take over</h3>
+          <p>Tap <b>Take over display</b> to open the full-screen takeover page and tap, drag or go back in the app on the virtual display yourself. Tap a text field and type with your phone's own keyboard, as usual.</p>
+          <p class="need"><b>Use it for:</b> slider checks, requesting codes, choices only you should make.</p>
+        </article>
+      </div>
+      <ol class="timeline" style="margin-top: 32px">
+        <li><b>The agent asks for help</b><span>The dialog states which field and why. Instead of listing options in chat and waiting for a reply, the agent asks you to take over right away.</span></li>
+        <li><b>You take over; it stops at once</b><span>While you control the display, the agent's reads and taps are refused, not queued. It never fights you for the screen.</span></li>
+        <li><b>You hand back; it looks again</b><span>mobby discards frames from your session and makes the agent read the screen before deciding anything.</span></li>
+        <li><b>It continues on its own</b><span>Even if the agent already ended its turn, mobby sends "I finished on the virtual display, please continue" for you. No need to nudge it.</span></li>
+      </ol>
+      <div class="note warn">
+        <p>Text you type with the phone keyboard is visible to the agent after you hand back. For anything secret, use <b>Enter text</b> on the takeover page, which goes through the private input channel.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="safety-en">
+      <div class="chapter-head">
+        <span class="num">05</span>
+        <h2>Privileges stay with the screen, and actions stay narrow</h2>
+        <p>Controlling a phone takes a lot of power, so mobby keeps that power in a very small box.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Only the screen process is elevated</h3>
+          <p>ADB or root access goes to one separate screen worker. The four agents, the shell and everything else keep running as an ordinary app inside the Android sandbox.</p>
+        </article>
+        <article class="card">
+          <h3>Only fixed actions</h3>
+          <p>The worker listens on 127.0.0.1 only and authenticates with a fresh random token. It offers reading, tapping, typing, swiping and similar fixed actions, with no way to run arbitrary commands.</p>
+        </article>
+        <article class="card">
+          <h3>Verified before every step</h3>
+          <p>In built-in ADB mode, each action first re-authenticates with local ADB using the same pairing. Turn wireless debugging off and the action fails right away with the reason; the pairing is kept, and the same task resumes once you turn it back on.</p>
+        </article>
+        <article class="card">
+          <h3>Pairing keys are encrypted</h3>
+          <p>The ADB identity key is encrypted with Android Keystore. The six-digit pairing code is used once in memory and never written to disk or logs.</p>
+        </article>
+        <article class="card">
+          <h3>Hands off password fields</h3>
+          <p>The agent's text input refuses password fields. Screens the system protects, such as some payment pages, appear black in screenshots, and mobby does not get around that.</p>
+        </article>
+        <article class="card">
+          <h3>Granted per conversation</h3>
+          <p>Screen access belongs to a single conversation. Remove the <b>AI controls phone</b> tag and the next action has to be approved again.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="start-en">
+      <div class="chapter-head">
+        <span class="num">06</span>
+        <h2>Getting started</h2>
+        <p>The first setup takes a few minutes; after that, just open a conversation.</p>
+      </div>
+      <ol class="steps">
+        <li><b>Open the screen settings</b><span>Go to <em>Settings → Runtime → Screen control mode</em>. On Android 13 and later, Virtual display (built-in ADB) is preselected and saved only when you confirm.</span></li>
+        <li><b>Follow the guide</b><span>Notifications, Wi-Fi, Developer options and Wireless debugging, one at a time, with notes for each phone brand. Steps already done are skipped.</span></li>
+        <li><b>Pair</b><span>With accessibility on, tap <b>Pair automatically</b> and mobby reads the six-digit code from the system dialog. You can also type the code into a notification.</span></li>
+        <li><b>Add “AI controls phone” to a conversation</b><span>It is right on the empty conversation page (“AI controls tablet” on tablets). Then describe what you want, as you would in any chat.</span></li>
+      </ol>
+      <div class="note">
+        <p><b>You pair only once.</b> As long as wireless debugging is on, mobby reconnects with the saved pairing on its own. Phones usually turn wireless debugging off after a restart, so turn it back on; you only pair again if the system forgets the pairing.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="limits-en">
+      <div class="chapter-head">
+        <span class="num">07</span>
+        <h2>Known limits</h2>
+        <p>What it cannot do yet, or what has not been verified.</p>
+      </div>
+      <ul class="limits">
+        <li><b>Android version</b><span>The virtual display needs Android 13 or later, with the phone awake and unlocked. Use the current-screen mode on older systems.</span></li>
+        <li><b>Phone brands</b><span>Some Huawei EMUI / HarmonyOS versions have no wireless debugging switch and can only use accessibility mode. Pairing dialogs differ between brands; when auto pairing cannot read one, use the notification instead.</span></li>
+        <li><b>App behavior</b><span>Some apps jump back to the main screen or allow only one instance, and cannot be kept on the virtual display.</span></li>
+        <li><b>Seeing the screen</b><span>The preview refreshes on demand; it is not a video stream. Custom-drawn screens without descriptions rely on screenshots and coordinates; there is no OCR yet.</span></li>
+        <li><b>One at a time</b><span>Only one virtual-display task runs at once, and the screen mode can change only after it ends.</span></li>
+        <li><b>Root mode</b><span>Not yet verified on a rooted phone.</span></li>
+      </ul>
+    </section>
+
+    <a class="next" href="mobby-coding-on-your-phone.html">
+      <div>
+        <small>Next</small>
+        <strong>Coding on your phone</strong>
+        <span>The agent writes and runs code on the device, and can turn it into a program that runs on schedule and sends notifications.</span>
+      </div>
+      <span class="go" aria-hidden="true">→</span>
+    </a>
+  </main>
+
+  <footer class="wrap footer article-footer">
+    <span>© 2026 ytlog</span>
+    <a href="https://github.com/ytlog/mobby" target="_blank" rel="noopener">GitHub · ytlog/mobby</a>
+    <a href="./"><span data-l="zh">← 全部文章</span><span data-l="en">← All articles</span></a>
+  </footer>
+
+  <script src="article.js?v=3"></script>
+</body>
+</html>

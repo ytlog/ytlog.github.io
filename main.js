@@ -2,6 +2,7 @@
 const EN = {
   "nav.projects": "Projects",
   "nav.skills": "Skills",
+  "nav.articles": "Articles",
   "nav.showcase": "Showcase",
   "hero.eyebrow": "Android developer · Open-source portfolio",
   "hero.title": "Android infrastructure and AI engineering",
@@ -28,6 +29,7 @@ const EN = {
   "facts.license": "License",
   "links.repo": "Repository",
   "links.apk": "Download APK",
+  "links.articles": "Read the articles",
   "code.c1": "// 0 in live objects",
   "code.c2": "// old calls see it retired",
   "flow.1": "Your JVMTI agent",

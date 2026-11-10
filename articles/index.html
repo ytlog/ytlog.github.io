@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN" data-title-zh="文章 · ytlog" data-title-en="Articles · ytlog">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文章 · ytlog</title>
+  <meta name="description" content="ytlog 的文章：Android 基础架构、AI 工程化，以及 mobby 等开源项目的使用与设计。" data-en="Articles by ytlog on Android infrastructure, AI engineering, and how open-source projects such as mobby work.">
+  <meta name="keywords" content="ytlog, Android, AI 工程化, AI Agent, mobby, 手机 AI Agent, AI 操作手机, 手机写代码, Claude Code Android, Codex Android, OpenCode">
+  <meta name="author" content="ytlog">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)">
+  <link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/?lang=zh">
+  <link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ytlog">
+  <meta property="og:url" content="https://ytlog.github.io/articles/">
+  <meta property="og:title" content="Articles · ytlog">
+  <meta property="og:description" content="Articles by ytlog on Android infrastructure, AI engineering, and how open-source projects such as mobby work.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://ytlog.github.io/assets/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Articles · ytlog">
+  <meta name="twitter:description" content="Articles by ytlog on Android infrastructure, AI engineering, and how open-source projects such as mobby work.">
+  <meta name="twitter:image" content="https://ytlog.github.io/assets/og-card.png">
+  <link rel="icon" href="https://github.com/ytlog.png?size=64">
+  <script>
+    (function () {
+      var root = document.documentElement, q = new URLSearchParams(location.search), t = q.get("theme"), l = q.get("lang"), fixed = l === "en" || l === "zh";
+      try { t = t || localStorage.getItem("theme"); l = l || localStorage.getItem("lang"); } catch (e) {}
+      if (t === "black" || t === "white") root.dataset.theme = t;
+      if (l !== "en" && l !== "zh") l = (navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+      root.dataset.lang = l;
+      root.classList.add("js");
+      if (l === "en") {
+        document.title = root.dataset.titleEn;
+        var d = document.querySelector('meta[name="description"]');
+        d.content = d.dataset.en;
+      }
+      // ?lang=zh and ?lang=en are the two language versions; each one is its own canonical URL.
+      if (fixed) {
+        var c = document.createElement("link");
+        c.rel = "canonical";
+        c.href = location.origin + location.pathname + "?lang=" + l;
+        document.head.appendChild(c);
+      }
+    })();
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://ytlog.github.io/articles/#articles",
+      "name": "文章",
+      "alternateName": "Articles",
+      "description": "ytlog 的文章：Android 基础架构、AI 工程化，以及 mobby 等开源项目的使用与设计。",
+      "inLanguage": ["zh-CN", "en"],
+      "url": "https://ytlog.github.io/articles/",
+      "author": { "@id": "https://ytlog.github.io/#person" },
+      "hasPart": [
+        { "@id": "https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html#article" },
+        { "@id": "https://ytlog.github.io/articles/mobby-coding-on-your-phone.html#article" }
+      ],
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "url": "https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html", "name": "让 AI 替你操作手机" },
+          { "@type": "ListItem", "position": 2, "url": "https://ytlog.github.io/articles/mobby-coding-on-your-phone.html", "name": "在手机上写程序" }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ytlog.github.io/#person",
+      "name": "ytlog",
+      "url": "https://ytlog.github.io/",
+      "sameAs": ["https://github.com/ytlog"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ytlog", "item": "https://ytlog.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "文章", "item": "https://ytlog.github.io/articles/" }
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="stylesheet" href="../style.css?v=8">
+  <link rel="stylesheet" href="article.css?v=3">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a class="brand" href="../index.html">ytlog</a>
+        <span class="sep">/</span>
+        <span aria-current="page"><span data-l="zh">文章</span><span data-l="en">Articles</span></span>
+      </nav>
+      <nav class="nav">
+        <button class="chip" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M4.8 19.2l2.1-2.1M17.1 6.9l2.1-2.1"/></svg>
+          <span class="chip-label" id="theme-label">深色</span>
+        </button>
+        <button class="chip" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================== 中文 ============================== -->
+  <main class="wrap" data-l="zh" lang="zh-CN">
+    <section class="list-hero">
+      <p class="eyebrow">ytlog · 文章</p>
+      <h1>文章</h1>
+      <p class="lede">关于 Android 基础架构、AI 工程化，以及我做的开源项目：它们能做什么、怎么用、为什么这样设计。按项目分成系列。</p>
+    </section>
+
+    <section class="series" id="mobby" data-anchor="mobby">
+      <header class="series-head">
+        <img src="../assets/mobby-icon.svg" alt="" width="40" height="40">
+        <div>
+          <h2>mobby</h2>
+          <p>让 Pi、Claude Code、Codex、OpenCode 直接在 Android 上运行</p>
+        </div>
+        <nav class="series-links">
+          <a href="https://github.com/ytlog/mobby" target="_blank" rel="noopener">仓库</a>
+          <a href="https://github.com/ytlog/mobby/releases" target="_blank" rel="noopener">下载 APK</a>
+        </nav>
+      </header>
+
+      <div class="posts">
+        <a class="post" href="mobby-ai-uses-your-phone.html">
+          <div class="post-visual" aria-hidden="true">
+            <img src="../assets/mobby/app-feature-zh.gif" width="404" height="835" alt="" loading="lazy">
+          </div>
+          <div class="post-body">
+            <p class="post-tag">mobby · 操作手机</p>
+            <h3>让 AI 替你操作手机</h3>
+            <p class="post-sum">Agent 读屏幕、点按、输入、翻页，在一块独立的副屏上把多步任务做完。你留在 mobby 里看着它做；遇到密码、登录和验证码时，它会停下来请你接手，你交还后它接着往下做。</p>
+            <ul class="post-chapters">
+              <li>一次操作怎样完成</li>
+              <li>三种屏幕模式</li>
+              <li>副屏</li>
+              <li>需要你的时候</li>
+              <li>安全边界</li>
+              <li>开始使用</li>
+              <li>已知限制</li>
+            </ul>
+            <div class="post-foot">
+              <span class="post-meta"><time datetime="2026-11-10">2026-11-10</time> · 7 节 · 约 6 分钟</span>
+              <span class="post-go">阅读全文 <b aria-hidden="true">→</b></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="post" href="mobby-coding-on-your-phone.html">
+          <div class="post-visual" aria-hidden="true">
+            <img src="../assets/mobby/travel-checklist-zh.gif" width="404" height="835" alt="" loading="lazy">
+          </div>
+          <div class="post-body">
+            <p class="post-tag">mobby · 写程序</p>
+            <h3>在手机上写程序</h3>
+            <p class="post-sum">手机里有 Git、Node.js 和四个编程 Agent，可以直接写代码、跑起来、在浏览器里打开。想长期用的，还能写成 mobby 程序装进 App：按时运行、发通知、读写自己的数据，权限由你逐项决定。</p>
+            <ul class="post-chapters">
+              <li>口袋里的开发机</li>
+              <li>两种成果</li>
+              <li>mobby 程序</li>
+              <li>从一句话到装上</li>
+              <li>程序能做什么</li>
+              <li>权限</li>
+              <li>真实例子</li>
+              <li>已知限制</li>
+            </ul>
+            <div class="post-foot">
+              <span class="post-meta"><time datetime="2026-11-10">2026-11-10</time> · 8 节 · 约 6 分钟</span>
+              <span class="post-go">阅读全文 <b aria-hidden="true">→</b></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== English ============================== -->
+  <main class="wrap" data-l="en" lang="en">
+    <section class="list-hero">
+      <p class="eyebrow">ytlog · Articles</p>
+      <h1>Articles</h1>
+      <p class="lede">On Android infrastructure, AI engineering, and the open-source projects I build: what they do, how to use them, and why they work the way they do. Grouped into a series per project.</p>
+    </section>
+
+    <section class="series" id="mobby-en" data-anchor="mobby">
+      <header class="series-head">
+        <img src="../assets/mobby-icon.svg" alt="" width="40" height="40">
+        <div>
+          <h2>mobby</h2>
+          <p>Runs Pi, Claude Code, Codex and OpenCode directly on Android</p>
+        </div>
+        <nav class="series-links">
+          <a href="https://github.com/ytlog/mobby" target="_blank" rel="noopener">Repository</a>
+          <a href="https://github.com/ytlog/mobby/releases" target="_blank" rel="noopener">Download APK</a>
+        </nav>
+      </header>
+
+      <div class="posts">
+        <a class="post" href="mobby-ai-uses-your-phone.html">
+          <div class="post-visual" aria-hidden="true">
+            <img src="../assets/mobby/app-feature-en.gif" width="404" height="835" alt="" loading="lazy">
+          </div>
+          <div class="post-body">
+            <p class="post-tag">mobby · Using your phone</p>
+            <h3>Let AI use your phone</h3>
+            <p class="post-sum">The agent reads the screen, taps, types and moves between pages to finish multi-step tasks on a separate virtual display. You stay in mobby and watch. For passwords, sign-ins and verification codes it stops and hands control to you, then carries on once you hand it back.</p>
+            <ul class="post-chapters">
+              <li>How a step works</li>
+              <li>Three screen modes</li>
+              <li>The virtual display</li>
+              <li>When it needs you</li>
+              <li>Safety limits</li>
+              <li>Getting started</li>
+              <li>Known limits</li>
+            </ul>
+            <div class="post-foot">
+              <span class="post-meta"><time datetime="2026-11-10">Nov 10, 2026</time> · 7 sections · 7 min read</span>
+              <span class="post-go">Read <b aria-hidden="true">→</b></span>
+            </div>
+          </div>
+        </a>
+
+        <a class="post" href="mobby-coding-on-your-phone.html">
+          <div class="post-visual" aria-hidden="true">
+            <img src="../assets/mobby/travel-checklist-en.gif" width="404" height="835" alt="" loading="lazy">
+          </div>
+          <div class="post-body">
+            <p class="post-tag">mobby · Coding</p>
+            <h3>Coding on your phone</h3>
+            <p class="post-sum">Git, Node.js and four coding agents are on the phone, so it can write code, run it and open it in the browser. For things you'll keep using, it can write a mobby program you install in the app: it runs on schedule, sends notifications and keeps its own data, with each permission granted by you.</p>
+            <ul class="post-chapters">
+              <li>A dev box in your pocket</li>
+              <li>Two kinds of results</li>
+              <li>mobby programs</li>
+              <li>From a sentence to installed</li>
+              <li>What programs can do</li>
+              <li>Permissions</li>
+              <li>Real examples</li>
+              <li>Known limits</li>
+            </ul>
+            <div class="post-foot">
+              <span class="post-meta"><time datetime="2026-11-10">Nov 10, 2026</time> · 8 sections · 7 min read</span>
+              <span class="post-go">Read <b aria-hidden="true">→</b></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer article-footer">
+    <span>© 2026 ytlog</span>
+    <a href="https://github.com/ytlog" target="_blank" rel="noopener">GitHub · ytlog</a>
+    <a href="../index.html"><span data-l="zh">← 返回作品集</span><span data-l="en">← Back to portfolio</span></a>
+  </footer>
+
+  <script src="article.js?v=3"></script>
+</body>
+</html>

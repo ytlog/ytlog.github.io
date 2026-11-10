@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://ytlog.github.io/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://ytlog.github.io/showcase.html</loc></url>
+  <url>
+    <loc>https://ytlog.github.io/articles/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/?lang=zh</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/?lang=en</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=zh</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=en</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-ai-uses-your-phone.html"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/mobby-coding-on-your-phone.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=zh</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html"/>
+  </url>
+  <url>
+    <loc>https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=en</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ytlog.github.io/articles/mobby-coding-on-your-phone.html"/>
+  </url>
+</urlset>
